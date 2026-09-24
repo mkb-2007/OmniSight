@@ -21,6 +21,22 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+  <!-- Application Error Boundary Script -->
+  <script>
+    window.addEventListener('error', function(e) {
+      console.error('[OmniSight Global Error]', e.error || e.message);
+      if (!window.omniAppMounted) {
+        var boundary = document.getElementById('omnisight-error-boundary');
+        var loader = document.getElementById('omnisight-loader');
+        var msg = document.getElementById('omnisight-error-message');
+        if (loader) loader.style.display = 'none';
+        if (msg && e.message) msg.textContent = e.message;
+        if (boundary) boundary.style.display = 'flex';
+      }
+    });
+  </script>
+
+
   <style>
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -179,9 +195,33 @@
 <body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen" x-data="app()" x-init="initApp()">
 
   <!-- ========================================================================= -->
+  <!-- APPLICATION-LEVEL ERROR BOUNDARY                                          -->
+  <!-- ========================================================================= -->
+  <div id="omnisight-error-boundary" style="display: none;" class="fixed inset-0 z-[999999] bg-white flex items-center justify-center p-6 text-center">
+    <div class="max-w-md w-full bg-slate-50 border border-slate-200 rounded-2xl p-8 shadow-xl">
+      <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 text-2xl font-bold">
+        ⚠️
+      </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Something went wrong.</h2>
+      <p class="text-xs text-slate-500 mb-6 font-mono leading-relaxed" id="omnisight-error-message">
+        An unexpected error occurred while rendering the dashboard.
+      </p>
+      <div class="flex items-center justify-center space-x-3">
+        <button onclick="window.location.reload()" class="px-5 py-2.5 rounded-full bg-[#0077b6] hover:bg-[#006097] text-white text-xs font-semibold shadow-md transition cursor-pointer">
+          Reload Dashboard
+        </button>
+        <button onclick="window.location.href='/'" class="px-5 py-2.5 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold transition cursor-pointer">
+          Return Home
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
   <!-- OMNISIGHT PRODUCTION STARTUP / LOADING SCREEN                             -->
   <!-- ========================================================================= -->
   <div id="omnisight-loader" :class="{ 'fade-out': loaderFading }" x-show="!loaderHidden">
+
     <div class="loading-stage">
       <!-- High-resolution clean photographic environment with highway & bus -->
       <img src="/omnisight-bg-2x.png"
@@ -2349,7 +2389,7 @@
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:space-x-4">
               <div class="text-3xl sm:text-5xl font-black text-gray-900 tracking-tight flex items-center">
                 <span>Daily Societal Drain:</span>
-                <span class="ml-3 text-red-600 font-mono tracking-normal" x-text="'₹' + societalDrain.toLocaleString('en-IN')">₹3,56,000</span>
+                <span class="ml-3 text-red-600 font-mono tracking-normal" x-text="'₹' + (societalDrain || 0).toLocaleString('en-IN')">₹3,56,000</span>
               </div>
               <span class="text-xs font-mono text-gray-400 mt-2 sm:mt-0">+₹24.80/sec dynamic tick</span>
             </div>
@@ -4083,6 +4123,7 @@
         // Lifecycle & Initialization
         // ------------------------------------------------------------------
         async initApp() {
+          window.omniAppMounted = true;
           window.addEventListener('hashchange', () => this.handleRoute());
           window.addEventListener('popstate', () => this.handleRoute());
           this.startStartupSequence();
@@ -4101,15 +4142,14 @@
             return path;
           }
           let baseUrl = '';
-          try {
-            if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) {
-              baseUrl = import.meta.env.VITE_API_URL;
+          if (typeof window !== 'undefined') {
+            if (window.__ENV__ && window.__ENV__.VITE_API_URL && !window.__ENV__.VITE_API_URL.startsWith('%')) {
+              baseUrl = window.__ENV__.VITE_API_URL;
+            } else if (window.VITE_API_URL && typeof window.VITE_API_URL === 'string' && !window.VITE_API_URL.startsWith('%')) {
+              baseUrl = window.VITE_API_URL;
             }
-          } catch (e) {}
-          if (!baseUrl && typeof window !== 'undefined' && (window as any)?.__ENV__?.VITE_API_URL) {
-            baseUrl = (window as any).__ENV__.VITE_API_URL;
           }
-          if (baseUrl) {
+          if (baseUrl && typeof baseUrl === 'string') {
             const cleanBase = baseUrl.replace(/\/+$/, '');
             const cleanPath = path.startsWith('/') ? path : '/' + path;
             return cleanBase + cleanPath;
@@ -4281,6 +4321,16 @@
           };
 
           animFrameId = requestAnimationFrame(tick);
+
+          // Hard fallback in case requestAnimationFrame is throttled in background tabs
+          setTimeout(() => {
+            if (!this.loaderHidden) {
+              this.loaderFading = true;
+              this.isLoading = false;
+              this.loaderHidden = true;
+              this.handleRoute();
+            }
+          }, 3200);
 
           window.replayStartupLoader = () => {
             if (animFrameId) cancelAnimationFrame(animFrameId);
@@ -4865,24 +4915,24 @@
         async loadCityData() {
           try {
             const [dash, budget, roads, hazards] = await Promise.all([
-              this.fetchWithAuth('/api/city/dashboard'),
-              this.fetchWithAuth('/api/city/budget'),
-              this.fetchWithAuth('/api/city/roads'),
-              this.fetchWithAuth('/api/city/hazards')
+              this.fetchWithAuth('/api/city/dashboard').catch(() => null),
+              this.fetchWithAuth('/api/city/budget').catch(() => null),
+              this.fetchWithAuth('/api/city/roads').catch(() => null),
+              this.fetchWithAuth('/api/city/hazards').catch(() => null)
             ]);
 
-            if (dash.success) {
-              this.societalDrain = dash.data.societalDrain;
-              this.leaderboard = dash.data.leaderboard;
+            if (dash && dash.success && dash.data) {
+              if (typeof dash.data.societalDrain === 'number') this.societalDrain = dash.data.societalDrain;
+              if (Array.isArray(dash.data.leaderboard)) this.leaderboard = dash.data.leaderboard;
             }
-            if (budget.success) {
+            if (budget && budget.success && Array.isArray(budget.data)) {
               this.budgetItems = budget.data;
               this.totalApprovedBudget = this.budgetItems
-                .filter(b => b.status === 'APPROVED')
-                .reduce((acc, b) => acc + b.repairCost, 0);
+                .filter(b => b?.status === 'APPROVED')
+                .reduce((acc, b) => acc + (b?.repairCost || 0), 0);
             }
-            if (roads.success) this.cityRoads = roads.data;
-            if (hazards.success) this.cityHazards = hazards.data;
+            if (roads && roads.success && Array.isArray(roads.data)) this.cityRoads = roads.data;
+            if (hazards && hazards.success && Array.isArray(hazards.data)) this.cityHazards = hazards.data;
           } catch (e) {
             console.error('Error loading city data:', e);
           }
@@ -4891,10 +4941,10 @@
         async loadWardData() {
           try {
             const [dash, incs] = await Promise.all([
-              this.fetchWithAuth('/api/ward/dashboard'),
-              this.fetchWithAuth('/api/ward/incidents')
+              this.fetchWithAuth('/api/ward/dashboard').catch(() => null),
+              this.fetchWithAuth('/api/ward/incidents').catch(() => null)
             ]);
-            if (incs.success) {
+            if (incs && incs.success && Array.isArray(incs.data)) {
               this.kanbanCards = incs.data;
             }
           } catch (e) {
@@ -4905,13 +4955,13 @@
         async loadDeveloperData() {
           try {
             const [devices, telemetry] = await Promise.all([
-              this.fetchWithAuth('/api/developer/devices'),
-              this.fetchWithAuth('/api/developer/telemetry')
+              this.fetchWithAuth('/api/developer/devices').catch(() => null),
+              this.fetchWithAuth('/api/developer/telemetry').catch(() => null)
             ]);
-            if (devices.success) this.fleetNodes = devices.data;
-            if (telemetry.success && telemetry.data.length > 0) {
+            if (devices && devices.success && Array.isArray(devices.data)) this.fleetNodes = devices.data;
+            if (telemetry && telemetry.success && Array.isArray(telemetry.data) && telemetry.data.length > 0) {
               this.diagnosticLogs = telemetry.data.map(t =>
-                `[${new Date(t.timestamp).toTimeString().split(' ')[0]}] [${t.device?.vehicle?.vehicleNumber ? 'BUS#' + t.device.vehicle.vehicleNumber : 'NODE'}] [TELEMETRY] Ax: ${t.axG}g, Ay: ${t.ayG}g, Az: ${t.azG}g | GPS: ${t.latitude.toFixed(4)}, ${t.longitude.toFixed(4)} | Conf: ${t.visionConfidence}`
+                `[${new Date(t.timestamp).toTimeString().split(' ')[0]}] [${t.device?.vehicle?.vehicleNumber ? 'BUS#' + t.device.vehicle.vehicleNumber : 'NODE'}] [TELEMETRY] Ax: ${t.axG}g, Ay: ${t.ayG}g, Az: ${t.azG}g | GPS: ${t.latitude ? t.latitude.toFixed(4) : '0.0000'}, ${t.longitude ? t.longitude.toFixed(4) : '0.0000'} | Conf: ${t.visionConfidence ?? 'N/A'}`
               );
             }
           } catch (e) {
