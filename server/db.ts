@@ -2,12 +2,31 @@ import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcryptjs';
 
-const DB_FILE = path.resolve(process.cwd(), 'data', 'omnisight_db.json');
+let DB_FILE = path.resolve(process.cwd(), 'data', 'omnisight_db.json');
 
-// Ensure data directory exists
-const dataDir = path.dirname(DB_FILE);
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
+// Ensure data directory exists if running in writable local environment
+try {
+  const dataDir = path.dirname(DB_FILE);
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+} catch (e: any) {
+  // Read-only filesystem (e.g. Vercel Serverless Function)
+}
+
+// In serverless environments, redirect database storage to /tmp if available
+if (process.env.VERCEL === '1' || process.env.NOW_REGION || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  try {
+    const tmpFile = path.resolve('/tmp', 'omnisight_db.json');
+    if (!fs.existsSync(tmpFile) && fs.existsSync(DB_FILE)) {
+      fs.copyFileSync(DB_FILE, tmpFile);
+    }
+    if (fs.existsSync(tmpFile)) {
+      DB_FILE = tmpFile;
+    }
+  } catch (e: any) {
+    // Keep DB_FILE as default, save will handle in-memory
+  }
 }
 
 interface DatabaseSchema {
@@ -197,8 +216,14 @@ class PersistentStore {
 
   public save(data?: DatabaseSchema) {
     if (data) this.data = data;
-    fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+    try {
+      fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
+    } catch (e: any) {
+      // In serverless / read-only environment, keep changes in memory without throwing
+      console.warn('[DB] Persistent file write warning:', e.message);
+    }
   }
+
 
   public getTable(name: keyof DatabaseSchema): any[] {
     if (!this.data[name]) this.data[name] = [];

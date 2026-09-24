@@ -1121,6 +1121,12 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'HEALTHY', timestamp: new Date().toISOString(), platform: 'OmniSight Infrastructure OS' });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 OmniSight Express Backend running on http://localhost:${PORT}`);
-});
+export default app;
+export { app };
+
+if (process.env.VERCEL !== '1' && !process.env.NOW_REGION && process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`🚀 OmniSight Express Backend running on http://localhost:${PORT}`);
+  });
+}
+

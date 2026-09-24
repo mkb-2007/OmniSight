@@ -4095,7 +4095,85 @@
           this.handleRoute();
         },
 
+        getApiUrl(path) {
+          if (!path) return '';
+          if (path.startsWith('http://') || path.startsWith('https://')) {
+            return path;
+          }
+          let baseUrl = '';
+          try {
+            if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) {
+              baseUrl = import.meta.env.VITE_API_URL;
+            }
+          } catch (e) {}
+          if (!baseUrl && typeof window !== 'undefined' && (window as any)?.__ENV__?.VITE_API_URL) {
+            baseUrl = (window as any).__ENV__.VITE_API_URL;
+          }
+          if (baseUrl) {
+            const cleanBase = baseUrl.replace(/\/+$/, '');
+            const cleanPath = path.startsWith('/') ? path : '/' + path;
+            return cleanBase + cleanPath;
+          }
+          return path;
+        },
+
+        async parseResponseSafely(res) {
+          let text = '';
+          try {
+            text = await res.text();
+          } catch (readErr) {
+            return {
+              ok: false,
+              status: res.status,
+              data: null,
+              error: 'Unable to read response from server.'
+            };
+          }
+
+          const trimmed = (text || '').trim();
+
+          if (!trimmed) {
+            let msg = 'Empty response received from server.';
+            if (res.status === 401) msg = 'Invalid User ID or Password.';
+            else if (res.status === 403) msg = 'Access Denied: You do not have permission for this portal.';
+            else if (res.status === 404) msg = 'Authentication service endpoint not found (HTTP 404).';
+            else if (res.status === 405) msg = 'API method not allowed (HTTP 405). Please verify server deployment.';
+            else if (res.status >= 500) msg = 'Server error encountered (HTTP ' + res.status + '). Please try again later.';
+            return {
+              ok: false,
+              status: res.status,
+              data: null,
+              error: msg
+            };
+          }
+
+          try {
+            const json = JSON.parse(trimmed);
+            const isOk = res.ok && json.success !== false;
+            return {
+              ok: isOk,
+              status: res.status,
+              data: json,
+              error: isOk ? null : (json.error || json.message || 'Request failed.')
+            };
+          } catch (parseErr) {
+            let fallbackMsg = 'Unexpected server response format.';
+            if (res.status === 401) fallbackMsg = 'Invalid User ID or Password.';
+            else if (res.status === 403) fallbackMsg = 'Access Denied: You do not have permission for this portal.';
+            else if (res.status === 404) fallbackMsg = 'Authentication service endpoint not found (HTTP 404).';
+            else if (res.status === 405) fallbackMsg = 'API method not allowed (HTTP 405). Please verify API routing.';
+            else if (res.status >= 500) fallbackMsg = 'Server error encountered (HTTP ' + res.status + '). Please try again shortly.';
+            return {
+              ok: false,
+              status: res.status,
+              data: null,
+              error: fallbackMsg
+            };
+          }
+        },
+
         async fetchWithAuth(url, options = {}) {
+          const finalUrl = this.getApiUrl(url);
           const headers = {
             'Content-Type': 'application/json',
             ...(options.headers || {})
@@ -4103,16 +4181,16 @@
           if (this.authToken) {
             headers['Authorization'] = `Bearer ${this.authToken}`;
           }
-          const response = await fetch(url, { ...options, headers });
+          const response = await fetch(finalUrl, { ...options, headers });
           if (response.status === 401) {
             this.clearSessionState();
-            throw new Error('Session expired');
+            throw new Error('Session expired. Please sign in again.');
           }
-          if (response.status === 403) {
-            const data = await response.json();
-            throw new Error(data.error);
+          const parsed = await this.parseResponseSafely(response);
+          if (!parsed.ok) {
+            throw new Error(parsed.error || ('Request failed with status ' + response.status));
           }
-          return response.json();
+          return parsed.data;
         },
 
         async verifySession() {
@@ -4122,13 +4200,13 @@
             if (this.authToken) {
               headers['Authorization'] = `Bearer ${this.authToken}`;
             }
-            const response = await fetch('/api/auth/me', { headers });
+            const response = await fetch(this.getApiUrl('/api/auth/me'), { headers });
             if (response.ok) {
-              const res = await response.json();
-              if (res.success && res.user) {
-                this.currentUser = res.user;
+              const parsed = await this.parseResponseSafely(response);
+              if (parsed.ok && parsed.data && parsed.data.success && parsed.data.user) {
+                this.currentUser = parsed.data.user;
                 this.authState = 'AUTHENTICATED';
-                this.startRoleScopedAlerts(res.user.role);
+                this.startRoleScopedAlerts(parsed.data.user.role);
                 return;
               }
             }
@@ -4568,7 +4646,7 @@
           this.contactSubmitting = true;
 
           try {
-            const res = await fetch('/api/contact', {
+            const res = await fetch(this.getApiUrl('/api/contact'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -4580,13 +4658,14 @@
               })
             });
 
-            const data = await res.json();
-            if (!res.ok) {
-              throw new Error(data.error || 'Failed to submit inquiry. Please try again.');
+            const parsed = await this.parseResponseSafely(res);
+            if (!parsed.ok) {
+              throw new Error(parsed.error || 'Failed to submit inquiry. Please try again.');
             }
 
+            const data = parsed.data;
             this.contactSuccess = true;
-            this.contactInquiryId = data.inquiryId || ('INQ-' + Date.now().toString(36).toUpperCase());
+            this.contactInquiryId = data?.inquiryId || ('INQ-' + Date.now().toString(36).toUpperCase());
             this.contactForm = {
               name: '',
               email: '',
@@ -4678,6 +4757,8 @@
         },
 
         async submitLogin() {
+          if (this.isAuthenticating) return; // Prevent double-submit
+
           if (!this.loginForm.username || !this.loginForm.password) {
             this.loginError = 'Please enter both User ID and Password.';
             return;
@@ -4687,23 +4768,25 @@
           this.loginError = '';
 
           try {
-            const res = await fetch('/api/auth/login', {
+            const targetPortal = this.pendingTargetView === 'dev' ? 'developer' : this.pendingTargetView;
+            const res = await fetch(this.getApiUrl('/api/auth/login'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                username: this.loginForm.username,
+                username: this.loginForm.username.trim(),
                 password: this.loginForm.password,
-                portal: this.pendingTargetView === 'dev' ? 'developer' : this.pendingTargetView
+                portal: targetPortal
               })
             });
 
-            const data = await res.json();
-            if (!res.ok || !data.success) {
-              this.loginError = data.error || 'Authentication failed. Please verify credentials.';
+            const parsed = await this.parseResponseSafely(res);
+            if (!parsed.ok || !parsed.data || !parsed.data.success) {
+              this.loginError = parsed.error || 'Invalid User ID or Password.';
               this.isAuthenticating = false;
               return;
             }
 
+            const data = parsed.data;
             this.authToken = data.token;
             localStorage.setItem('omnisight_token', data.token);
             this.currentUser = data.user;
@@ -4735,14 +4818,15 @@
               this.pushRoute('/', { view: 'landing' });
             }
           } catch (e) {
-            this.loginError = e.message || 'Network error connecting to OmniSight API.';
+            console.error('[Login Connection Error]', e);
+            this.loginError = 'Unable to connect to the authentication service. Please try again.';
             this.isAuthenticating = false;
           }
         },
 
         async logout() {
           try {
-            await fetch('/api/auth/logout', { method: 'POST' });
+            await fetch(this.getApiUrl('/api/auth/logout'), { method: 'POST' });
           } catch (e) {}
           this.clearSessionState();
           this.currentView = 'landing';
