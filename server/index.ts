@@ -1067,6 +1067,55 @@ app.get('/api/analytics', authMiddleware, async (req: AuthenticatedRequest, res:
   }
 });
 
+// ============================================================================
+// 7. PUBLIC CONTACT INQUIRY ENDPOINT
+// ============================================================================
+app.post('/api/contact', async (req: Request, res: Response) => {
+  try {
+    const { name, email, organization, subject, message } = req.body;
+
+    if (!name || !name.trim()) {
+      return res.status(400).json({ success: false, error: 'Please provide your full name.' });
+    }
+    if (!email || !email.trim()) {
+      return res.status(400).json({ success: false, error: 'Please provide your email address.' });
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      return res.status(400).json({ success: false, error: 'Please provide a valid email address.' });
+    }
+    if (!organization || !organization.trim()) {
+      return res.status(400).json({ success: false, error: 'Please specify your organization or municipal department.' });
+    }
+    if (!subject || !subject.trim()) {
+      return res.status(400).json({ success: false, error: 'Please provide an inquiry subject.' });
+    }
+    if (!message || !message.trim()) {
+      return res.status(400).json({ success: false, error: 'Please enter your message.' });
+    }
+
+    // Persist inquiry in audit logs
+    const audit = await prisma.auditLog.create({
+      data: {
+        action: 'CONTACT_INQUIRY_SUBMITTED',
+        details: `From: ${name.trim()} (${email.trim()}) | Org: ${organization.trim()} | Subject: ${subject.trim()}`
+      }
+    });
+
+    console.log(`[CONTACT] New inquiry from ${name} (${organization}): ${subject}`);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Thank you for reaching out to OmniSight. Our municipal infrastructure team will connect with you within 24 business hours.',
+      inquiryId: audit.id,
+      timestamp: new Date().toISOString()
+    });
+  } catch (err: any) {
+    console.error('[CONTACT_ERROR]', err);
+    return res.status(500).json({ success: false, error: 'Failed to process inquiry. Please try again later.' });
+  }
+});
+
 // Root & Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'HEALTHY', timestamp: new Date().toISOString(), platform: 'OmniSight Infrastructure OS' });

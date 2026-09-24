@@ -1322,6 +1322,78 @@
       "userId": "usr-ward",
       "action": "LOGIN_SUCCESS",
       "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790223782520-115",
+      "createdAt": "2026-09-24T04:23:02.520Z",
+      "action": "CONTACT_INQUIRY_SUBMITTED",
+      "details": "From: Er. Suresh Kumar (suresh.kumar@chennai.gov.in) | Org: Greater Chennai Corporation - Bus Transit Infra | Subject: Sensor pod deployment query"
+    },
+    {
+      "id": "aud-1790224492798-890",
+      "createdAt": "2026-09-24T04:34:52.798Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790224492969-803",
+      "createdAt": "2026-09-24T04:34:52.969Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790224493131-522",
+      "createdAt": "2026-09-24T04:34:53.131Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790224623594-911",
+      "createdAt": "2026-09-24T04:37:03.594Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790224623750-726",
+      "createdAt": "2026-09-24T04:37:03.750Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790224623907-46",
+      "createdAt": "2026-09-24T04:37:03.907Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790224657428-380",
+      "createdAt": "2026-09-24T04:37:37.428Z",
+      "action": "CONTACT_INQUIRY_SUBMITTED",
+      "details": "From: Commissioner Office (commissioner@chennaicorporation.gov.in) | Org: Greater Chennai Corporation | Subject: Phase 2 Bus Pod Fleet Rollout"
+    },
+    {
+      "id": "aud-1790224661578-990",
+      "createdAt": "2026-09-24T04:37:41.578Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790224661728-690",
+      "createdAt": "2026-09-24T04:37:41.728Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790224661885-659",
+      "createdAt": "2026-09-24T04:37:41.885Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
     }
   ]
 }
