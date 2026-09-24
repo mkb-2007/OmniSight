@@ -1420,6 +1420,39 @@
       "createdAt": "2026-09-24T05:02:35.569Z",
       "action": "CONTACT_INQUIRY_SUBMITTED",
       "details": "From: Commissioner Office (commissioner@chennaicorporation.gov.in) | Org: Greater Chennai Corporation | Subject: Phase 2 Bus Pod Fleet Rollout"
+    },
+    {
+      "id": "aud-1790226460968-716",
+      "createdAt": "2026-09-24T05:07:40.968Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790226824428-519",
+      "createdAt": "2026-09-24T05:13:44.428Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790226824569-38",
+      "createdAt": "2026-09-24T05:13:44.569Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790226824717-885",
+      "createdAt": "2026-09-24T05:13:44.717Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790226836985-898",
+      "createdAt": "2026-09-24T05:13:56.985Z",
+      "action": "CONTACT_INQUIRY_SUBMITTED",
+      "details": "From: Commissioner Office (commissioner@chennaicorporation.gov.in) | Org: Greater Chennai Corporation | Subject: Phase 2 Bus Pod Fleet Rollout"
     }
   ]
 }

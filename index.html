@@ -4217,6 +4217,26 @@
         // ------------------------------------------------------------------
         // Navigation & Multi-Page Routing
         // ------------------------------------------------------------------
+        // ------------------------------------------------------------------
+        // Single-Entry History Management (Fixes Click Back Twice Issue)
+        // ------------------------------------------------------------------
+        pushRoute(path, state = {}) {
+          if (window.location.pathname === path && !window.location.hash) {
+            return;
+          }
+          if (window.history && window.history.pushState) {
+            window.history.pushState(state, '', path);
+          } else {
+            window.location.hash = '#' + path;
+          }
+        },
+
+        replaceRoute(path, state = {}) {
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(state, '', path);
+          }
+        },
+
         navigateTo(view) {
           this.mobileMenuOpen = false;
           this.currentView = view;
@@ -4230,9 +4250,7 @@
             'portal-select': '/portal-select'
           };
           const targetPath = pathMap[view] || ('/' + view);
-          if (window.history && window.history.pushState) {
-            window.history.pushState({ view }, '', targetPath);
-          }
+          this.pushRoute(targetPath, { view });
           this.$nextTick(() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           });
@@ -4245,6 +4263,11 @@
           const parts = routeStr.split('/');
           const section = parts[0] || '';
           const sub = parts[1] || '';
+
+          // If the user arrived with a hash (e.g. #/about), clean it up with replaceState so it never causes double-back history
+          if (hash && window.history && window.history.replaceState) {
+            window.history.replaceState({ view: section }, '', '/' + routeStr);
+          }
 
           // 1. Landing (Home)
           if (!section || section === 'landing') {
@@ -4382,27 +4405,34 @@
 
         redirectToAuthorizedPortal() {
           if (!this.currentUser) {
-            window.location.hash = '#/';
-            this.currentView = 'landing';
+            this.navigateLanding();
             return;
           }
           if (this.currentUser.role === 'CITY') {
-            window.location.hash = '#/city';
+            this.currentView = 'city';
+            this.pushRoute('/city', { view: 'city' });
+            this.loadPortalData('city');
           } else if (this.currentUser.role === 'WARD') {
-            window.location.hash = '#/ward';
+            this.currentView = 'ward';
+            this.pushRoute('/ward', { view: 'ward' });
+            this.loadPortalData('ward');
           } else if (this.currentUser.role === 'DEVELOPER') {
-            window.location.hash = '#/developer';
+            this.currentView = 'dev';
+            this.pushRoute('/developer', { view: 'dev' });
+            this.loadPortalData('dev');
           }
         },
 
         setCityTab(tab) {
           this.cityTab = tab;
-          window.location.hash = tab === 'economic' ? '#/city/analytics' : (tab === 'budget' ? '#/city/hazards' : '#/city/' + tab);
+          const subPath = tab === 'economic' ? 'analytics' : (tab === 'budget' ? 'hazards' : tab);
+          this.replaceRoute('/city/' + subPath);
         },
 
         setWardTab(tab) {
           this.wardTab = tab;
-          window.location.hash = tab === 'kanban' ? '#/ward/incidents' : (tab === 'triage' ? '#/ward/map' : '#/ward/' + tab);
+          const subPath = tab === 'kanban' ? 'incidents' : (tab === 'triage' ? 'map' : tab);
+          this.replaceRoute('/ward/' + subPath);
         },
 
         get selectedBus() {
@@ -4474,16 +4504,17 @@
 
         setDevTab(tab) {
           this.devTab = tab;
-          const hashMapping = {
-            fleet: '#/developer/devices',
-            diagnostics: '#/developer/telemetry',
-            bandwidth: '#/developer/bandwidth',
-            settings: '#/developer/settings',
-            logs: '#/developer/logs',
-            devices: '#/developer/hardware',
-            api: '#/developer/api'
+          const subMapping = {
+            fleet: 'devices',
+            diagnostics: 'telemetry',
+            bandwidth: 'bandwidth',
+            settings: 'settings',
+            logs: 'logs',
+            devices: 'hardware',
+            api: 'api'
           };
-          window.location.hash = hashMapping[tab] || '#/developer/' + tab;
+          const subPath = subMapping[tab] || tab;
+          this.replaceRoute('/developer/' + subPath);
         },
 
         // ------------------------------------------------------------------
@@ -4497,10 +4528,7 @@
           this.mobileMenuOpen = false;
           this.currentView = 'portal-select';
           this.showLoginModal = false;
-          if (window.history && window.history.pushState) {
-            window.history.pushState({ view: 'portal-select' }, '', '/portal-select');
-          }
-          window.location.hash = '#/portal-select';
+          this.pushRoute('/portal-select', { view: 'portal-select' });
           this.$nextTick(() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           });
@@ -4611,10 +4639,7 @@
           this.showLoginModal = false;
 
           const portalSlug = target === 'dev' ? 'developer' : target;
-          if (window.history && window.history.pushState) {
-            window.history.pushState({ view: 'login', portal: target }, '', '/login/' + portalSlug);
-          }
-          window.location.hash = '#/login/' + portalSlug;
+          this.pushRoute('/login/' + portalSlug, { view: 'login', portal: target });
 
           this.$nextTick(() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4623,11 +4648,7 @@
 
         closeLoginModal() {
           this.showLoginModal = false;
-          if (this.currentView === 'portal-select') {
-            window.location.hash = '#/portal-select';
-          } else {
-            window.location.hash = '#/';
-          }
+          this.navigateToPortalSelect();
         },
 
         openWardSelection() {
@@ -4698,20 +4719,20 @@
 
             // Dynamic role-based redirection to authorized dashboard
             if (data.user.role === 'CITY') {
-              window.location.hash = '#/city';
               this.currentView = 'city';
+              this.pushRoute('/city', { view: 'city' });
               await this.loadPortalData('city');
             } else if (data.user.role === 'WARD') {
-              window.location.hash = '#/ward';
               this.currentView = 'ward';
+              this.pushRoute('/ward', { view: 'ward' });
               await this.loadPortalData('ward');
             } else if (data.user.role === 'DEVELOPER') {
-              window.location.hash = '#/developer';
               this.currentView = 'dev';
+              this.pushRoute('/developer', { view: 'dev' });
               await this.loadPortalData('dev');
             } else {
-              window.location.hash = '#/';
               this.currentView = 'landing';
+              this.pushRoute('/', { view: 'landing' });
             }
           } catch (e) {
             this.loginError = e.message || 'Network error connecting to OmniSight API.';
@@ -4727,14 +4748,15 @@
           this.currentView = 'landing';
           this.activeSection = 'hero';
           this.showLoginModal = false;
-          window.location.hash = '#/';
+          this.pushRoute('/', { view: 'landing' });
         },
 
         navigateLanding() {
+          this.mobileMenuOpen = false;
           this.currentView = 'landing';
           this.activeSection = 'hero';
           this.showLoginModal = false;
-          window.location.hash = '#/';
+          this.pushRoute('/', { view: 'landing' });
           this.$nextTick(() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           });
