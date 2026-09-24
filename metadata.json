@@ -1,0 +1,8 @@
+{
+  "name": "OmniSight Chennai - Municipal Road Infrastructure Intelligence",
+  "description": "Enterprise road health monitoring, societal drain economic tracking, ward-level active triage, and edge bus fleet diagnostics for Greater Chennai Corporation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

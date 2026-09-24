@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique // "CITY", "WARD", "DEVELOPER"
+  description String?
+  users       User[]
+  createdAt   DateTime @default(now())
+}
+
+model City {
+  id        String   @id @default(uuid())
+  name      String   // "Greater Chennai Corporation"
+  state     String   // "Tamil Nadu"
+  wards     Ward[]
+  roads     Road[]
+  createdAt DateTime @default(now())
+}
+
+model Ward {
+  id          String     @id @default(uuid())
+  zoneNumber  String     // "13", "09", "08"
+  name        String     // "Adyar", "Teynampet"
+  code        String     @unique // "Z13-W172"
+  cityId      String
+  city        City       @relation(fields: [cityId], references: [id])
+  users       User[]
+  hazards     Hazard[]
+  incidents   Incident[]
+  createdAt   DateTime   @default(now())
+}
+
+model User {
+  id           String          @id @default(uuid())
+  username     String          @unique // "city_admin", "ward_admin", "developer_admin"
+  passwordHash String
+  fullName     String
+  email        String?
+  roleId       String
+  role         Role            @relation(fields: [roleId], references: [id])
+  wardId       String?
+  ward         Ward?           @relation(fields: [wardId], references: [id])
+  auditLogs    AuditLog[]
+  statusChanges StatusHistory[]
+  createdAt    DateTime        @default(now())
+}
+
+model Vehicle {
+  id            String   @id @default(uuid())
+  vehicleNumber String   @unique // "47", "19B", "29C", "5C"
+  route         String   // "Adyar ⇄ Broadway"
+  type          String   @default("Transit Bus")
+  deviceId      String?  @unique
+  device        Device?  @relation(fields: [deviceId], references: [id])
+  createdAt     DateTime @default(now())
+}
+
+model Device {
+  id            String      @id @default(uuid())
+  deviceSerial  String      @unique // "JETSON-ORIN-047"
+  ipAddress     String?
+  firmwareVer   String      @default("v2.4.1")
+  status        String      @default("ONLINE") // "ONLINE", "OFFLINE", "DEGRADED"
+  lastSeen      DateTime    @default(now())
+  sqliteUsageMb Int         @default(38)
+  jetsonTempC   Int         @default(54)
+  lteDbm        Int         @default(-72)
+  camFps        Float       @default(30.0)
+  vehicle       Vehicle?
+  sensors       Sensor[]
+  telemetries   Telemetry[]
+  createdAt     DateTime    @default(now())
+}
+
+model Sensor {
+  id           String   @id @default(uuid())
+  deviceId     String
+  device       Device   @relation(fields: [deviceId], references: [id])
+  type         String   // "CAMERA_4K", "IMU_6AXIS", "GPS_RTK", "LIDAR"
+  model        String   @default("Sony IMX577 / Bosch BMI088")
+  sampleRateHz Int      @default(30)
+  status       String   @default("ACTIVE")
+  createdAt    DateTime @default(now())
+}
+
+model Road {
+  id                 String   @id @default(uuid())
+  name               String   // "Anna Salai", "LB Road"
+  corridor           String?  // "DMS Junction", "Adyar Signal Approach"
+  cityId             String
+  city               City     @relation(fields: [cityId], references: [id])
+  startLat           Float
+  startLng           Float
+  endLat             Float
+  endLng             Float
+  status             String   @default("CRITICAL") // "OPTIMAL", "WARNING", "CRITICAL"
+  dailySocietalDrain Int      @default(0) // in INR
+  hazards            Hazard[]
+  createdAt          DateTime @default(now())
+}
+
+model Telemetry {
+  id               String   @id @default(uuid())
+  deviceId         String
+  device           Device   @relation(fields: [deviceId], references: [id])
+  timestamp        DateTime @default(now())
+  latitude         Float
+  longitude        Float
+  speedKmph        Float    @default(32.4)
+  axG              Float    @default(0.0)
+  ayG              Float    @default(0.0)
+  azG              Float    @default(1.0)
+  visionConfidence Float    @default(0.95)
+  rawLog           String?
+  hazards          Hazard[]
+  createdAt        DateTime @default(now())
+}
+
+model Hazard {
+  id              String     @id @default(uuid())
+  hazardCode      String     @unique // "HAZ-1049"
+  type            String     // "POTHOLE", "CRATER", "WATERLOGGING", "DEPRESSION"
+  severity        String     // "L1", "L2", "L3"
+  latitude        Float
+  longitude       Float
+  depthCm         Float?
+  spikeG          Float?
+  confidenceScore Float      @default(0.95)
+  roadId          String
+  road            Road       @relation(fields: [roadId], references: [id])
+  wardId          String
+  ward            Ward       @relation(fields: [wardId], references: [id])
+  telemetryId     String?
+  telemetry       Telemetry? @relation(fields: [telemetryId], references: [id])
+  incidents       Incident[]
+  createdAt       DateTime   @default(now())
+}
+
+model Incident {
+  id              String          @id @default(uuid())
+  ticketNumber    String          @unique // "WO-1049"
+  title           String
+  type            String          @default("Single Pothole (L1)")
+  priority        String          @default("L1") // "L1", "L2", "L3"
+  status          String          @default("DETECTED") // "DETECTED", "VERIFIED", "ASSIGNED", "IN_PROGRESS", "RESOLVED"
+  hazardId        String?
+  hazard          Hazard?         @relation(fields: [hazardId], references: [id])
+  wardId          String
+  ward            Ward            @relation(fields: [wardId], references: [id])
+  contractor      String?         // "Coromandel Infra", "South Madras Works"
+  etaMinutes      Int?            @default(18)
+  notes           String?
+  statusHistories StatusHistory[]
+  repairs         Repair[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model StatusHistory {
+  id              String   @id @default(uuid())
+  incidentId      String
+  incident        Incident @relation(fields: [incidentId], references: [id])
+  previousStatus  String
+  newStatus       String
+  changedByUserId String?
+  changedByUser   User?    @relation(fields: [changedByUserId], references: [id])
+  notes           String?
+  timestamp       DateTime @default(now())
+}
+
+model Repair {
+  id                     String    @id @default(uuid())
+  incidentId             String
+  incident               Incident  @relation(fields: [incidentId], references: [id])
+  repairCostInr          Int       @default(65000)
+  estimatedDrainSavedInr Int       @default(195000)
+  roiMultiplier          Float     @default(3.0)
+  verificationVerdict    String    @default("PENDING") // "PASSED", "REJECTED", "PENDING"
+  geoDeltaMeters         Float?
+  textureMatchPercent    Float?
+  verifiedAt             DateTime?
+  status                 String    @default("PENDING") // "PENDING", "APPROVED", "COMPLETED"
+  createdAt              DateTime  @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String   // "LOGIN_SUCCESS", "LOGIN_FAILED", "BUDGET_APPROVED", "INCIDENT_STATUS_CHANGE", "DISPATCH_L1"
+  details   String?
+  ipAddress String?
+  userAgent String?
+  timestamp DateTime @default(now())
+}

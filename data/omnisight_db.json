@@ -1,0 +1,1327 @@
+{
+  "roles": [
+    {
+      "id": "role-city",
+      "name": "CITY",
+      "description": "City Municipal Official"
+    },
+    {
+      "id": "role-ward",
+      "name": "WARD",
+      "description": "Ward Infrastructure Engineer"
+    },
+    {
+      "id": "role-dev",
+      "name": "DEVELOPER",
+      "description": "Edge-AI Systems Lead"
+    }
+  ],
+  "cities": [
+    {
+      "id": "city-chennai",
+      "name": "Greater Chennai Corporation",
+      "state": "Tamil Nadu"
+    }
+  ],
+  "wards": [
+    {
+      "id": "ward-13",
+      "zoneNumber": "13",
+      "name": "Zone 13: Adyar",
+      "code": "Z13-W172",
+      "cityId": "city-chennai"
+    },
+    {
+      "id": "ward-09",
+      "zoneNumber": "09",
+      "name": "Zone 9: Teynampet",
+      "code": "Z09-W118",
+      "cityId": "city-chennai"
+    },
+    {
+      "id": "ward-08",
+      "zoneNumber": "08",
+      "name": "Zone 8: Anna Nagar",
+      "code": "Z08-W104",
+      "cityId": "city-chennai"
+    },
+    {
+      "id": "ward-10",
+      "zoneNumber": "10",
+      "name": "Zone 10: Kodambakkam",
+      "code": "Z10-W132",
+      "cityId": "city-chennai"
+    },
+    {
+      "id": "ward-05",
+      "zoneNumber": "05",
+      "name": "Zone 5: Royapuram",
+      "code": "Z05-W052",
+      "cityId": "city-chennai"
+    },
+    {
+      "id": "ward-04",
+      "zoneNumber": "04",
+      "name": "Zone 4: Tondiarpet",
+      "code": "Z04-W039",
+      "cityId": "city-chennai"
+    },
+    {
+      "id": "ward-14",
+      "zoneNumber": "14",
+      "name": "Zone 14: Perungudi",
+      "code": "Z14-W181",
+      "cityId": "city-chennai"
+    },
+    {
+      "id": "ward-15",
+      "zoneNumber": "15",
+      "name": "Zone 15: Sholinganallur",
+      "code": "Z15-W198",
+      "cityId": "city-chennai"
+    },
+    {
+      "id": "ward-07",
+      "zoneNumber": "07",
+      "name": "Zone 7: Ambattur",
+      "code": "Z07-W085",
+      "cityId": "city-chennai"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr-city",
+      "username": "city_admin",
+      "passwordHash": "$2b$10$UHdbM5N5SJFwp0BBvzaU4OpeHVP4Ar/mokrke9pdo2DdaiDOT866G",
+      "fullName": "Dr. K. Radhakrishnan (Chief Municipal Commissioner)",
+      "email": "commissioner@chennaicorporation.gov.in",
+      "roleId": "role-city",
+      "wardId": null
+    },
+    {
+      "id": "usr-ward",
+      "username": "ward_admin",
+      "passwordHash": "$2b$10$UHdbM5N5SJFwp0BBvzaU4OpeHVP4Ar/mokrke9pdo2DdaiDOT866G",
+      "fullName": "S. Vengatesan (Executive Engineer, Zone 13)",
+      "email": "ee.zone13@chennaicorporation.gov.in",
+      "roleId": "role-ward",
+      "wardId": "ward-13"
+    },
+    {
+      "id": "usr-dev",
+      "username": "developer_admin",
+      "passwordHash": "$2b$10$UHdbM5N5SJFwp0BBvzaU4OpeHVP4Ar/mokrke9pdo2DdaiDOT866G",
+      "fullName": "Arunachalam Murugan (Edge-AI Systems Lead)",
+      "email": "edge.lead@omnisight.ai",
+      "roleId": "role-dev",
+      "wardId": null
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "veh-47",
+      "vehicleNumber": "47",
+      "route": "Adyar ⇄ Broadway",
+      "deviceId": "dev-47",
+      "type": "MTC Electric Fleet Bus"
+    },
+    {
+      "id": "veh-19",
+      "vehicleNumber": "19B",
+      "route": "T.Nagar ⇄ Kelambakkam",
+      "deviceId": "dev-19",
+      "type": "MTC Electric Fleet Bus"
+    },
+    {
+      "id": "veh-29",
+      "vehicleNumber": "29C",
+      "route": "Perambur ⇄ Besant Nagar",
+      "deviceId": "dev-29",
+      "type": "MTC Electric Fleet Bus"
+    },
+    {
+      "id": "veh-05",
+      "vehicleNumber": "5C",
+      "route": "Broadway ⇄ Taramani",
+      "deviceId": "dev-05",
+      "type": "MTC Electric Fleet Bus"
+    },
+    {
+      "id": "veh-21",
+      "vehicleNumber": "21G",
+      "route": "Tambaram ⇄ Broadway",
+      "deviceId": "dev-21",
+      "type": "MTC Electric Fleet Bus"
+    },
+    {
+      "id": "veh-01",
+      "vehicleNumber": "A1",
+      "route": "Central ⇄ Thiruvanmiyur",
+      "deviceId": "dev-01",
+      "type": "MTC Electric Fleet Bus"
+    }
+  ],
+  "devices": [
+    {
+      "id": "dev-47",
+      "deviceSerial": "JETSON-ORIN-047",
+      "ipAddress": "10.244.12.47",
+      "firmwareVer": "v2.4.1",
+      "status": "ONLINE",
+      "sqliteUsageMb": 38,
+      "jetsonTempC": 54,
+      "lteDbm": -72,
+      "camFps": 30
+    },
+    {
+      "id": "dev-19",
+      "deviceSerial": "JETSON-ORIN-019",
+      "ipAddress": "10.244.12.19",
+      "firmwareVer": "v2.4.1",
+      "status": "ONLINE",
+      "sqliteUsageMb": 44,
+      "jetsonTempC": 57,
+      "lteDbm": -78,
+      "camFps": 29.8
+    },
+    {
+      "id": "dev-29",
+      "deviceSerial": "JETSON-ORIN-029",
+      "ipAddress": "10.244.12.29",
+      "firmwareVer": "v2.4.1",
+      "status": "ONLINE",
+      "sqliteUsageMb": 29,
+      "jetsonTempC": 52,
+      "lteDbm": -69,
+      "camFps": 30
+    },
+    {
+      "id": "dev-05",
+      "deviceSerial": "JETSON-ORIN-005",
+      "ipAddress": "10.244.12.05",
+      "firmwareVer": "v2.4.1",
+      "status": "ONLINE",
+      "sqliteUsageMb": 51,
+      "jetsonTempC": 61,
+      "lteDbm": -81,
+      "camFps": 30
+    },
+    {
+      "id": "dev-21",
+      "deviceSerial": "JETSON-ORIN-021",
+      "ipAddress": "10.244.12.21",
+      "firmwareVer": "v2.4.1",
+      "status": "ONLINE",
+      "sqliteUsageMb": 33,
+      "jetsonTempC": 55,
+      "lteDbm": -74,
+      "camFps": 29.9
+    },
+    {
+      "id": "dev-01",
+      "deviceSerial": "JETSON-ORIN-001",
+      "ipAddress": "10.244.12.01",
+      "firmwareVer": "v2.4.1",
+      "status": "ONLINE",
+      "sqliteUsageMb": 40,
+      "jetsonTempC": 53,
+      "lteDbm": -70,
+      "camFps": 30
+    }
+  ],
+  "sensors": [],
+  "roads": [
+    {
+      "id": "rd-anna",
+      "name": "Anna Salai",
+      "corridor": "DMS Junction (30m Segment)",
+      "cityId": "city-chennai",
+      "startLat": 13.0441,
+      "startLng": 80.2502,
+      "endLat": 13.0444,
+      "endLng": 80.2505,
+      "status": "CRITICAL",
+      "dailySocietalDrain": 284000
+    },
+    {
+      "id": "rd-lb",
+      "name": "LB Road",
+      "corridor": "Adyar Signal Approach (30m Segment)",
+      "cityId": "city-chennai",
+      "startLat": 13.0034,
+      "startLng": 80.2551,
+      "endLat": 13.0037,
+      "endLng": 80.2554,
+      "status": "CRITICAL",
+      "dailySocietalDrain": 195000
+    },
+    {
+      "id": "rd-ph",
+      "name": "Poonamallee High Rd",
+      "corridor": "Kilpauk Medical College Lateral",
+      "cityId": "city-chennai",
+      "startLat": 13.0784,
+      "startLng": 80.2411,
+      "endLat": 13.0787,
+      "endLng": 80.2414,
+      "status": "CRITICAL",
+      "dailySocietalDrain": 312000
+    },
+    {
+      "id": "rd-jn",
+      "name": "Jawaharlal Nehru Rd",
+      "corridor": "Koyambedu Flyover Base Approach",
+      "cityId": "city-chennai",
+      "startLat": 13.0692,
+      "startLng": 80.1942,
+      "endLat": 13.0695,
+      "endLng": 80.1945,
+      "status": "CRITICAL",
+      "dailySocietalDrain": 440000
+    },
+    {
+      "id": "rd-omr",
+      "name": "Old Mahabalipuram Rd (OMR)",
+      "corridor": "Taramani Tidal Park Ext",
+      "cityId": "city-chennai",
+      "startLat": 12.988,
+      "startLng": 80.245,
+      "endLat": 12.9885,
+      "endLng": 80.2455,
+      "status": "OPTIMAL",
+      "dailySocietalDrain": 12000
+    },
+    {
+      "id": "rd-kam",
+      "name": "Kamarajar Salai",
+      "corridor": "Marina Beach Promenade Corridor",
+      "cityId": "city-chennai",
+      "startLat": 13.05,
+      "startLng": 80.282,
+      "endLat": 13.051,
+      "endLng": 80.2825,
+      "status": "OPTIMAL",
+      "dailySocietalDrain": 8000
+    }
+  ],
+  "hazards": [
+    {
+      "id": "haz-1",
+      "hazardCode": "HAZ-1049",
+      "type": "CRATER",
+      "severity": "L1",
+      "latitude": 13.0034,
+      "longitude": 80.2551,
+      "depthCm": 15,
+      "spikeG": 3.95,
+      "confidenceScore": 0.98,
+      "roadId": "rd-lb",
+      "wardId": "ward-13",
+      "telemetryId": "tel-1",
+      "createdAt": "2026-09-23T18:26:20.213Z"
+    },
+    {
+      "id": "haz-2",
+      "hazardCode": "HAZ-1050",
+      "type": "POTHOLE",
+      "severity": "L2",
+      "latitude": 13.0112,
+      "longitude": 80.2344,
+      "depthCm": 8.5,
+      "spikeG": 2.65,
+      "confidenceScore": 0.94,
+      "roadId": "rd-lb",
+      "wardId": "ward-13",
+      "telemetryId": "tel-2",
+      "createdAt": "2026-09-23T18:26:20.214Z"
+    },
+    {
+      "id": "haz-3",
+      "hazardCode": "HAZ-1051",
+      "type": "SURFACE_RAVELLING",
+      "severity": "L3",
+      "latitude": 13.0078,
+      "longitude": 80.2589,
+      "depthCm": 4.2,
+      "spikeG": 1.85,
+      "confidenceScore": 0.91,
+      "roadId": "rd-lb",
+      "wardId": "ward-13",
+      "telemetryId": "tel-3",
+      "createdAt": "2026-09-23T18:26:20.214Z"
+    },
+    {
+      "id": "haz-4",
+      "hazardCode": "HAZ-1052",
+      "type": "DEPRESSION",
+      "severity": "L2",
+      "latitude": 12.9982,
+      "longitude": 80.2671,
+      "depthCm": 9.1,
+      "spikeG": 2.82,
+      "confidenceScore": 0.93,
+      "roadId": "rd-lb",
+      "wardId": "ward-13",
+      "telemetryId": "tel-4",
+      "createdAt": "2026-09-23T18:26:20.214Z"
+    },
+    {
+      "id": "haz-5",
+      "hazardCode": "HAZ-1053",
+      "type": "CRATER",
+      "severity": "L1",
+      "latitude": 13.0055,
+      "longitude": 80.2488,
+      "depthCm": 13.8,
+      "spikeG": 3.75,
+      "confidenceScore": 0.97,
+      "roadId": "rd-lb",
+      "wardId": "ward-13",
+      "telemetryId": "tel-5",
+      "createdAt": "2026-09-23T18:26:20.214Z"
+    },
+    {
+      "id": "haz-6",
+      "hazardCode": "HAZ-1054",
+      "type": "CRATER",
+      "severity": "L1",
+      "latitude": 13.0441,
+      "longitude": 80.2502,
+      "depthCm": 14.2,
+      "spikeG": 3.82,
+      "confidenceScore": 0.98,
+      "roadId": "rd-anna",
+      "wardId": "ward-09",
+      "telemetryId": "tel-6",
+      "createdAt": "2026-09-23T18:26:20.214Z"
+    },
+    {
+      "id": "haz-7",
+      "hazardCode": "HAZ-1055",
+      "type": "WATERLOGGING",
+      "severity": "L2",
+      "latitude": 13.0784,
+      "longitude": 80.2411,
+      "depthCm": 12.8,
+      "spikeG": 3.41,
+      "confidenceScore": 0.95,
+      "roadId": "rd-ph",
+      "wardId": "ward-08",
+      "telemetryId": "tel-7",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "haz-8",
+      "hazardCode": "HAZ-1056",
+      "type": "CRATER",
+      "severity": "L1",
+      "latitude": 13.0692,
+      "longitude": 80.1942,
+      "depthCm": 13.9,
+      "spikeG": 3.65,
+      "confidenceScore": 0.97,
+      "roadId": "rd-jn",
+      "wardId": "ward-10",
+      "telemetryId": "tel-8",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "inc-1",
+      "ticketNumber": "WO-1049",
+      "title": "LB Road Deep Crater Patch",
+      "type": "Single Pothole (L1)",
+      "priority": "L1",
+      "status": "RESOLVED",
+      "hazardId": "haz-1",
+      "wardId": "ward-13",
+      "contractor": "Coromandel Infra",
+      "etaMinutes": 18,
+      "notes": "Cold mix asphalt team arrived on site",
+      "createdAt": "2026-09-23T18:26:20.215Z",
+      "updatedAt": "2026-09-23T20:26:36.236Z"
+    },
+    {
+      "id": "inc-2",
+      "ticketNumber": "WO-1050",
+      "title": "Sardar Patel Rd 30m Micro-overlay",
+      "type": "30m Cluster (L2)",
+      "priority": "L2",
+      "status": "IN_PROGRESS",
+      "hazardId": "haz-2",
+      "wardId": "ward-13",
+      "contractor": "South Madras Works",
+      "etaMinutes": 45,
+      "notes": "Micro-overlay crew on site",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "inc-3",
+      "ticketNumber": "WO-1051",
+      "title": "Gandhi Nagar Thermoplastic Repainting",
+      "type": "Faded Zebra Crossing (L3)",
+      "priority": "L3",
+      "status": "RESOLVED",
+      "hazardId": "haz-3",
+      "wardId": "ward-13",
+      "contractor": "GCC In-house",
+      "etaMinutes": 0,
+      "notes": "Thermoplastic cure complete",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "inc-4",
+      "ticketNumber": "WO-1052",
+      "title": "Besant Nagar 2nd Avenue Asphalt Leveling",
+      "type": "Depression Cluster (L2)",
+      "priority": "L2",
+      "status": "ASSIGNED",
+      "hazardId": "haz-4",
+      "wardId": "ward-13",
+      "contractor": "Coromandel Infra",
+      "etaMinutes": 60,
+      "notes": "Awaiting aggregate delivery",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "inc-5",
+      "ticketNumber": "WO-1053",
+      "title": "Kasturba Nagar Railway Border Pothole",
+      "type": "Single Pothole (L1)",
+      "priority": "L1",
+      "status": "VERIFIED",
+      "hazardId": "haz-5",
+      "wardId": "ward-13",
+      "contractor": "South Madras Works",
+      "etaMinutes": 20,
+      "notes": "Camera verified by Bus #47",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "inc-1790191739719-870",
+      "createdAt": "2026-09-23T19:28:59.719Z",
+      "ticketNumber": "WO-2563",
+      "title": "Emergency Rapid Patch - HAZ-1049",
+      "type": "Single Pothole (L1)",
+      "priority": "L1",
+      "status": "IN_PROGRESS",
+      "hazardId": "haz-1",
+      "wardId": "ward-13",
+      "contractor": "Coromandel Infrastructure Ltd (Unit #3)",
+      "etaMinutes": 18,
+      "notes": "Dispatched immediately by S. Vengatesan (Executive Engineer, Zone 13)"
+    },
+    {
+      "id": "inc-1790195196228-329",
+      "createdAt": "2026-09-23T20:26:36.228Z",
+      "ticketNumber": "WO-5412",
+      "title": "Emergency Rapid Patch - HAZ-1049",
+      "type": "Single Pothole (L1)",
+      "priority": "L1",
+      "status": "IN_PROGRESS",
+      "hazardId": "haz-1",
+      "wardId": "ward-13",
+      "contractor": "Coromandel Infrastructure Ltd (Unit #3)",
+      "etaMinutes": 18,
+      "notes": "Dispatched immediately by S. Vengatesan (Executive Engineer, Zone 13)"
+    }
+  ],
+  "telemetries": [
+    {
+      "id": "tel-1",
+      "deviceId": "dev-47",
+      "latitude": 13.0034,
+      "longitude": 80.2551,
+      "speedKmph": 31.5,
+      "axG": -0.12,
+      "ayG": 0.04,
+      "azG": 3.95,
+      "visionConfidence": 0.98,
+      "rawLog": "[BUS#47] Crater Depth 15.0cm detected at LB Road"
+    },
+    {
+      "id": "tel-2",
+      "deviceId": "dev-29",
+      "latitude": 13.0112,
+      "longitude": 80.2344,
+      "speedKmph": 28,
+      "axG": -0.05,
+      "ayG": 0.02,
+      "azG": 2.65,
+      "visionConfidence": 0.94,
+      "rawLog": "[BUS#29C] Pothole 8.5cm detected at Sardar Patel Rd"
+    },
+    {
+      "id": "tel-3",
+      "deviceId": "dev-47",
+      "latitude": 13.0078,
+      "longitude": 80.2589,
+      "speedKmph": 35,
+      "axG": -0.08,
+      "ayG": 0.01,
+      "azG": 1.85,
+      "visionConfidence": 0.91,
+      "rawLog": "[BUS#47] Ravelling detected at Gandhi Nagar"
+    },
+    {
+      "id": "tel-4",
+      "deviceId": "dev-29",
+      "latitude": 12.9982,
+      "longitude": 80.2671,
+      "speedKmph": 26.5,
+      "axG": -0.04,
+      "ayG": 0.03,
+      "azG": 2.82,
+      "visionConfidence": 0.93,
+      "rawLog": "[BUS#29C] Depression detected at Besant Nagar"
+    },
+    {
+      "id": "tel-5",
+      "deviceId": "dev-47",
+      "latitude": 13.0055,
+      "longitude": 80.2488,
+      "speedKmph": 33,
+      "axG": -0.1,
+      "ayG": 0.05,
+      "azG": 3.75,
+      "visionConfidence": 0.97,
+      "rawLog": "[BUS#47] Crater detected at Kasturba Nagar"
+    },
+    {
+      "id": "tel-6",
+      "deviceId": "dev-47",
+      "latitude": 13.0441,
+      "longitude": 80.2502,
+      "speedKmph": 30,
+      "axG": -0.11,
+      "ayG": 0.04,
+      "azG": 3.82,
+      "visionConfidence": 0.98,
+      "rawLog": "[BUS#47] Crater detected at Anna Salai DMS"
+    },
+    {
+      "id": "tel-7",
+      "deviceId": "dev-19",
+      "latitude": 13.0784,
+      "longitude": 80.2411,
+      "speedKmph": 29.5,
+      "axG": -0.09,
+      "ayG": 0.02,
+      "azG": 3.41,
+      "visionConfidence": 0.95,
+      "rawLog": "[BUS#19B] Waterlogged dip detected at Poonamallee"
+    },
+    {
+      "id": "tel-8",
+      "deviceId": "dev-05",
+      "latitude": 13.0692,
+      "longitude": 80.1942,
+      "speedKmph": 34,
+      "axG": -0.13,
+      "ayG": 0.06,
+      "azG": 3.65,
+      "visionConfidence": 0.97,
+      "rawLog": "[BUS#5C] Crater detected at Koyambedu Flyover"
+    }
+  ],
+  "repairs": [
+    {
+      "id": "rep-1",
+      "incidentId": "inc-1",
+      "repairCostInr": 65000,
+      "estimatedDrainSavedInr": 195000,
+      "roiMultiplier": 3,
+      "status": "APPROVED",
+      "verificationVerdict": "PASSED",
+      "createdAt": "2026-09-23T18:26:20.215Z",
+      "geoDeltaMeters": 3.42,
+      "textureMatchPercent": 97.4,
+      "verifiedAt": "2026-09-23T20:26:36.237Z",
+      "updatedAt": "2026-09-23T20:26:36.259Z"
+    },
+    {
+      "id": "rep-2",
+      "incidentId": "inc-2",
+      "repairCostInr": 85000,
+      "estimatedDrainSavedInr": 284000,
+      "roiMultiplier": 3.3,
+      "status": "PENDING",
+      "verificationVerdict": "PENDING",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "rep-3",
+      "incidentId": "inc-3",
+      "repairCostInr": 35000,
+      "estimatedDrainSavedInr": 90000,
+      "roiMultiplier": 2.6,
+      "status": "COMPLETED",
+      "verificationVerdict": "PASSED",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "rep-4",
+      "incidentId": "inc-4",
+      "repairCostInr": 92000,
+      "estimatedDrainSavedInr": 312000,
+      "roiMultiplier": 3.4,
+      "status": "APPROVED",
+      "verificationVerdict": "PENDING",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "rep-5",
+      "incidentId": "inc-5",
+      "repairCostInr": 120000,
+      "estimatedDrainSavedInr": 440000,
+      "roiMultiplier": 3.6,
+      "status": "PENDING",
+      "verificationVerdict": "PENDING",
+      "createdAt": "2026-09-23T18:26:20.215Z"
+    }
+  ],
+  "statusHistories": [
+    {
+      "id": "sh-1",
+      "incidentId": "inc-1",
+      "previousStatus": "NEW",
+      "newStatus": "DETECTED",
+      "notes": "Sensor telemetry ingestion",
+      "timestamp": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "sh-2",
+      "incidentId": "inc-2",
+      "previousStatus": "ASSIGNED",
+      "newStatus": "IN_PROGRESS",
+      "notes": "Crew dispatched",
+      "timestamp": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "sta-1790189385833-10",
+      "createdAt": "2026-09-23T18:49:45.833Z",
+      "incidentId": "inc-1",
+      "previousStatus": "DETECTED",
+      "newStatus": "DETECTED",
+      "changedByUserId": "usr-ward",
+      "notes": "[NOTE] Inspection confirmed by Ward 13 field assistant"
+    },
+    {
+      "id": "sta-1790191739711-105",
+      "createdAt": "2026-09-23T19:28:59.711Z",
+      "incidentId": "inc-1",
+      "previousStatus": "DETECTED",
+      "newStatus": "IN_PROGRESS",
+      "changedByUserId": "usr-ward",
+      "notes": "Cold mix asphalt team arrived on site"
+    },
+    {
+      "id": "sta-1790195196219-405",
+      "createdAt": "2026-09-23T20:26:36.219Z",
+      "incidentId": "inc-1",
+      "previousStatus": "RESOLVED",
+      "newStatus": "IN_PROGRESS",
+      "changedByUserId": "usr-ward",
+      "notes": "Cold mix asphalt team arrived on site"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "aud-1",
+      "userId": "usr-city",
+      "action": "SYSTEM_BOOTSTRAP",
+      "details": "OmniSight database initialized with Chennai infrastructure grid.",
+      "timestamp": "2026-09-23T18:26:20.215Z"
+    },
+    {
+      "id": "aud-1790188025244-152",
+      "createdAt": "2026-09-23T18:27:05.244Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790188025448-258",
+      "createdAt": "2026-09-23T18:27:05.448Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790189385644-296",
+      "createdAt": "2026-09-23T18:49:45.644Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790189385819-207",
+      "createdAt": "2026-09-23T18:49:45.819Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790189385986-561",
+      "createdAt": "2026-09-23T18:49:45.986Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790191660600-581",
+      "createdAt": "2026-09-23T19:27:40.600Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790191739018-720",
+      "createdAt": "2026-09-23T19:28:59.018Z",
+      "userId": "usr-city",
+      "action": "LOGIN_FAILED_BAD_PASSWORD",
+      "details": "Failed password attempt for user city_admin"
+    },
+    {
+      "id": "aud-1790191739024-715",
+      "createdAt": "2026-09-23T19:28:59.024Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User non_existent_user not found for portal: ANY"
+    },
+    {
+      "id": "aud-1790191739185-416",
+      "createdAt": "2026-09-23T19:28:59.185Z",
+      "userId": "usr-city",
+      "action": "LOGIN_REJECTED_WRONG_PORTAL",
+      "details": "User role CITY attempted unauthorized access to ward portal."
+    },
+    {
+      "id": "aud-1790191739353-133",
+      "createdAt": "2026-09-23T19:28:59.353Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790191739518-980",
+      "createdAt": "2026-09-23T19:28:59.518Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790191739687-997",
+      "createdAt": "2026-09-23T19:28:59.687Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790191739712-178",
+      "createdAt": "2026-09-23T19:28:59.712Z",
+      "userId": "usr-ward",
+      "action": "WARD_INCIDENT_UPDATED",
+      "details": "Incident WO-1049 updated by S. Vengatesan (Executive Engineer, Zone 13)."
+    },
+    {
+      "id": "aud-1790191739720-907",
+      "createdAt": "2026-09-23T19:28:59.720Z",
+      "userId": "usr-ward",
+      "action": "DISPATCH_L1_CREW",
+      "details": "Emergency L1 patch crew dispatched for HAZ-1049 under ticket WO-2563."
+    },
+    {
+      "id": "aud-1790191739729-43",
+      "createdAt": "2026-09-23T19:28:59.729Z",
+      "userId": "usr-ward",
+      "action": "VERIFICATION_AUDIT",
+      "details": "Ticket WO-1049 audit completed with verdict: PASSED."
+    },
+    {
+      "id": "aud-1790191739740-448",
+      "createdAt": "2026-09-23T19:28:59.740Z",
+      "userId": "usr-dev",
+      "action": "OTA_FIRMWARE_CALIBRATION",
+      "details": "Calibration broadcast: Cutoff=20Hz, Buffer=400ms, Spike=2.5G to 142 nodes."
+    },
+    {
+      "id": "aud-1790191739747-572",
+      "createdAt": "2026-09-23T19:28:59.747Z",
+      "userId": "usr-city",
+      "action": "BUDGET_APPROVED",
+      "details": "Approved repair budget ₹65000 for ticket WO-1049."
+    },
+    {
+      "id": "aud-1790195195574-171",
+      "createdAt": "2026-09-23T20:26:35.574Z",
+      "userId": "usr-city",
+      "action": "LOGIN_FAILED_BAD_PASSWORD",
+      "details": "Failed password attempt for user city_admin"
+    },
+    {
+      "id": "aud-1790195195580-737",
+      "createdAt": "2026-09-23T20:26:35.580Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User non_existent_user not found for portal: ANY"
+    },
+    {
+      "id": "aud-1790195195731-442",
+      "createdAt": "2026-09-23T20:26:35.731Z",
+      "userId": "usr-city",
+      "action": "LOGIN_REJECTED_WRONG_PORTAL",
+      "details": "User role CITY attempted unauthorized access to ward portal."
+    },
+    {
+      "id": "aud-1790195195881-259",
+      "createdAt": "2026-09-23T20:26:35.881Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790195196034-798",
+      "createdAt": "2026-09-23T20:26:36.034Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790195196193-878",
+      "createdAt": "2026-09-23T20:26:36.193Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790195196221-289",
+      "createdAt": "2026-09-23T20:26:36.221Z",
+      "userId": "usr-ward",
+      "action": "WARD_INCIDENT_UPDATED",
+      "details": "Incident WO-1049 updated by S. Vengatesan (Executive Engineer, Zone 13)."
+    },
+    {
+      "id": "aud-1790195196230-542",
+      "createdAt": "2026-09-23T20:26:36.230Z",
+      "userId": "usr-ward",
+      "action": "DISPATCH_L1_CREW",
+      "details": "Emergency L1 patch crew dispatched for HAZ-1049 under ticket WO-5412."
+    },
+    {
+      "id": "aud-1790195196239-83",
+      "createdAt": "2026-09-23T20:26:36.239Z",
+      "userId": "usr-ward",
+      "action": "VERIFICATION_AUDIT",
+      "details": "Ticket WO-1049 audit completed with verdict: PASSED."
+    },
+    {
+      "id": "aud-1790195196251-411",
+      "createdAt": "2026-09-23T20:26:36.251Z",
+      "userId": "usr-dev",
+      "action": "OTA_FIRMWARE_CALIBRATION",
+      "details": "Calibration broadcast: Cutoff=20Hz, Buffer=400ms, Spike=2.5G to 142 nodes."
+    },
+    {
+      "id": "aud-1790195196261-668",
+      "createdAt": "2026-09-23T20:26:36.261Z",
+      "userId": "usr-city",
+      "action": "BUDGET_APPROVED",
+      "details": "Approved repair budget ₹65000 for ticket WO-1049."
+    },
+    {
+      "id": "aud-1790195272274-950",
+      "createdAt": "2026-09-23T20:27:52.274Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to CITY portal."
+    },
+    {
+      "id": "aud-1790195272441-350",
+      "createdAt": "2026-09-23T20:27:52.441Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to WARD portal."
+    },
+    {
+      "id": "aud-1790195278703-451",
+      "createdAt": "2026-09-23T20:27:58.703Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to WARD portal."
+    },
+    {
+      "id": "aud-1790195302681-543",
+      "createdAt": "2026-09-23T20:28:22.681Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to CITY portal."
+    },
+    {
+      "id": "aud-1790195302833-423",
+      "createdAt": "2026-09-23T20:28:22.833Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to WARD portal."
+    },
+    {
+      "id": "aud-1790195302996-771",
+      "createdAt": "2026-09-23T20:28:22.996Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to DEVELOPER portal."
+    },
+    {
+      "id": "aud-1790195303157-777",
+      "createdAt": "2026-09-23T20:28:23.157Z",
+      "userId": "usr-city",
+      "action": "LOGIN_FAILED_BAD_PASSWORD",
+      "details": "Failed password attempt for user city_admin"
+    },
+    {
+      "id": "aud-1790196131251-214",
+      "createdAt": "2026-09-23T20:42:11.251Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790196131414-358",
+      "createdAt": "2026-09-23T20:42:11.414Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790196131580-319",
+      "createdAt": "2026-09-23T20:42:11.580Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_REJECTED_WRONG_PORTAL",
+      "details": "User role DEVELOPER attempted unauthorized access to dev portal."
+    },
+    {
+      "id": "aud-1790196162449-274",
+      "createdAt": "2026-09-23T20:42:42.449Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790196162621-957",
+      "createdAt": "2026-09-23T20:42:42.621Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790196162785-770",
+      "createdAt": "2026-09-23T20:42:42.785Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to dev portal."
+    },
+    {
+      "id": "aud-1790196162946-637",
+      "createdAt": "2026-09-23T20:42:42.946Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790197168153-551",
+      "createdAt": "2026-09-23T20:59:28.153Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790199118721-645",
+      "createdAt": "2026-09-23T21:31:58.721Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790199118798-607",
+      "createdAt": "2026-09-23T21:31:58.798Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790199118883-25",
+      "createdAt": "2026-09-23T21:31:58.883Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790199180146-354",
+      "createdAt": "2026-09-23T21:33:00.146Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790199180217-337",
+      "createdAt": "2026-09-23T21:33:00.217Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790199180287-283",
+      "createdAt": "2026-09-23T21:33:00.287Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790199238210-408",
+      "createdAt": "2026-09-23T21:33:58.210Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790199351052-211",
+      "createdAt": "2026-09-23T21:35:51.052Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790199351120-987",
+      "createdAt": "2026-09-23T21:35:51.120Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790199351190-932",
+      "createdAt": "2026-09-23T21:35:51.190Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790199690002-580",
+      "createdAt": "2026-09-23T21:41:30.002Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790200684778-223",
+      "createdAt": "2026-09-23T21:58:04.778Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790201480495-993",
+      "createdAt": "2026-09-23T22:11:20.495Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790201480647-219",
+      "createdAt": "2026-09-23T22:11:20.647Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790201480801-938",
+      "createdAt": "2026-09-23T22:11:20.801Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790201650862-840",
+      "createdAt": "2026-09-23T22:14:10.862Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790206877804-586",
+      "createdAt": "2026-09-23T23:41:17.804Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790206877953-745",
+      "createdAt": "2026-09-23T23:41:17.953Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790206878103-928",
+      "createdAt": "2026-09-23T23:41:18.103Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790207021983-970",
+      "createdAt": "2026-09-23T23:43:41.983Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User fake not found for portal: ANY"
+    },
+    {
+      "id": "aud-1790207022145-213",
+      "createdAt": "2026-09-23T23:43:42.145Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790207022310-261",
+      "createdAt": "2026-09-23T23:43:42.310Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790207022465-70",
+      "createdAt": "2026-09-23T23:43:42.465Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to dev portal."
+    },
+    {
+      "id": "aud-1790207022614-323",
+      "createdAt": "2026-09-23T23:43:42.614Z",
+      "userId": "usr-city",
+      "action": "LOGIN_REJECTED_WRONG_PORTAL",
+      "details": "User role CITY attempted unauthorized access to developer portal."
+    },
+    {
+      "id": "aud-1790207096255-73",
+      "createdAt": "2026-09-23T23:44:56.255Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790207096406-154",
+      "createdAt": "2026-09-23T23:44:56.406Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790207096572-698",
+      "createdAt": "2026-09-23T23:44:56.572Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790209475728-682",
+      "createdAt": "2026-09-24T00:24:35.728Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790209475880-926",
+      "createdAt": "2026-09-24T00:24:35.880Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790209476032-395",
+      "createdAt": "2026-09-24T00:24:36.032Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790209482747-471",
+      "createdAt": "2026-09-24T00:24:42.747Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User fake not found for portal: ANY"
+    },
+    {
+      "id": "aud-1790209482900-334",
+      "createdAt": "2026-09-24T00:24:42.900Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790209483050-312",
+      "createdAt": "2026-09-24T00:24:43.050Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790209483204-838",
+      "createdAt": "2026-09-24T00:24:43.204Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to dev portal."
+    },
+    {
+      "id": "aud-1790209483362-204",
+      "createdAt": "2026-09-24T00:24:43.362Z",
+      "userId": "usr-city",
+      "action": "LOGIN_REJECTED_WRONG_PORTAL",
+      "details": "User role CITY attempted unauthorized access to developer portal."
+    },
+    {
+      "id": "aud-1790209555156-63",
+      "createdAt": "2026-09-24T00:25:55.156Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790209555306-622",
+      "createdAt": "2026-09-24T00:25:55.306Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790209555458-940",
+      "createdAt": "2026-09-24T00:25:55.458Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790210626996-433",
+      "createdAt": "2026-09-24T00:43:46.996Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790217139634-812",
+      "createdAt": "2026-09-24T02:32:19.634Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790217481231-250",
+      "createdAt": "2026-09-24T02:38:01.231Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790217481381-219",
+      "createdAt": "2026-09-24T02:38:01.381Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790217481531-354",
+      "createdAt": "2026-09-24T02:38:01.531Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    }
+  ]
+}
