@@ -1394,6 +1394,32 @@
       "userId": "usr-ward",
       "action": "LOGIN_SUCCESS",
       "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790226144879-392",
+      "createdAt": "2026-09-24T05:02:24.879Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790226145028-607",
+      "createdAt": "2026-09-24T05:02:25.028Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790226145177-180",
+      "createdAt": "2026-09-24T05:02:25.177Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790226155569-736",
+      "createdAt": "2026-09-24T05:02:35.569Z",
+      "action": "CONTACT_INQUIRY_SUBMITTED",
+      "details": "From: Commissioner Office (commissioner@chennaicorporation.gov.in) | Org: Greater Chennai Corporation | Subject: Phase 2 Bus Pod Fleet Rollout"
     }
   ]
 }
