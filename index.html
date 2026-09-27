@@ -106,75 +106,6 @@
       color: #0284c7;
     }
 
-    /* ========================================================================= */
-    /* PROGRESSIVE BLUR SYSTEM (HEADER & FOOTER)                                 */
-    /* ========================================================================= */
-
-    /* Header Progressive Blur (Apple-style frosted glass with subtle ambient glow) */
-    .header-progressive-blur {
-      position: sticky;
-      top: 0;
-      z-index: 45;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(24px) saturate(190%);
-      -webkit-backdrop-filter: blur(24px) saturate(190%);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
-      transition: background 300ms var(--ease-spring), border-color 300ms var(--ease-spring), box-shadow 300ms var(--ease-spring);
-    }
-
-    /* Progressive Feather Blur Veil directly under sticky Header */
-    .header-progressive-veil {
-      position: sticky;
-      top: 61px;
-      left: 0;
-      right: 0;
-      height: 28px;
-      margin-top: -28px;
-      pointer-events: none;
-      z-index: 44;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 100%);
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    /* Footer Progressive Blur & Veil System */
-    .footer-progressive-blur {
-      position: relative;
-      background: linear-gradient(180deg, #090e1a 0%, #040711 100%);
-      border-top: 1px solid rgba(56, 189, 248, 0.18);
-      backdrop-filter: blur(28px) saturate(190%);
-      -webkit-backdrop-filter: blur(28px) saturate(190%);
-      box-shadow: 0 -15px 45px -10px rgba(2, 6, 23, 0.4);
-    }
-
-    .footer-progressive-veil {
-      position: absolute;
-      bottom: 100%;
-      left: 0;
-      right: 0;
-      height: 38px;
-      pointer-events: none;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: linear-gradient(to top, rgba(9, 14, 26, 0.75) 0%, rgba(9, 14, 26, 0.2) 60%, rgba(9, 14, 26, 0) 100%);
-      mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
-      -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    .footer-progressive-blur::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 15%;
-      right: 15%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.6) 50%, transparent 100%);
-      pointer-events: none;
-    }
-
     /* Futuristic Cyber Glow & Gradient Text System */
     .gradient-text-cyan {
       background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 40%, #2563eb 100%);
@@ -826,8 +757,8 @@
     </div>
   </div>
 
-  <!-- GLOBAL HEADER (OmniSight Navigation & Unified Entry with Progressive Blur) -->
-  <header x-show="currentView !== 'login'" class="header-progressive-blur px-6 sm:px-8 py-3.5 flex items-center justify-between">
+  <!-- GLOBAL HEADER (OmniSight Navigation & Unified Entry) -->
+  <header x-show="currentView !== 'login'" class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-6 sm:px-8 py-3.5 flex items-center justify-between shadow-xs transition-all">
     <!-- Left: OmniSight Logo & Tagline -->
     <div class="flex items-center space-x-4">
       <button @click="navigateLanding()" class="flex items-center space-x-3 group focus:outline-hidden text-left cursor-pointer">
@@ -994,9 +925,6 @@
       </template>
     </div>
   </header>
-
-  <!-- Stepped Progressive Blur Veil under sticky Header -->
-  <div x-show="currentView !== 'login'" class="header-progressive-veil"></div>
 
   <!-- MOBILE NAVIGATION DROPDOWN (Responsive Navigation Menu) -->
   <div x-show="mobileMenuOpen && authState !== 'AUTHENTICATED'"
@@ -1380,12 +1308,9 @@
 
       </section>
 
-      <!-- Site Footer with Progressive Blur & Ambient Lighting -->
-      <footer class="footer-progressive-blur text-white py-14 px-6 sm:px-8 relative">
-        <!-- Progressive Feathering Blur Veil -->
-        <div class="footer-progressive-veil"></div>
-
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400 relative z-10">
+      <!-- Site Footer -->
+      <footer class="bg-slate-900 text-white border-t border-slate-800 py-12 px-6 sm:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
           <div class="flex items-center space-x-3.5">
             <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center font-black text-white text-xs shadow-md shadow-sky-500/25">
               O
@@ -1771,12 +1696,9 @@
           </div>
         </section>
 
-        <!-- Site Footer with Progressive Blur & Ambient Lighting -->
-        <footer class="footer-progressive-blur text-white py-14 px-6 sm:px-8 relative">
-          <!-- Progressive Feathering Blur Veil -->
-          <div class="footer-progressive-veil"></div>
-
-          <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400 relative z-10">
+        <!-- Site Footer -->
+        <footer class="bg-slate-900 text-white border-t border-slate-800 py-12 px-6 sm:px-8">
+          <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
             <div class="flex items-center space-x-3.5">
               <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center font-black text-white text-xs shadow-md shadow-sky-500/25">O</div>
               <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
@@ -2011,12 +1933,9 @@
           </div>
         </section>
 
-        <!-- Site Footer with Progressive Blur & Ambient Lighting -->
-        <footer class="footer-progressive-blur text-white py-14 px-6 sm:px-8 relative">
-          <!-- Progressive Feathering Blur Veil -->
-          <div class="footer-progressive-veil"></div>
-
-          <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400 relative z-10">
+        <!-- Site Footer -->
+        <footer class="bg-slate-900 text-white border-t border-slate-800 py-12 px-6 sm:px-8">
+          <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
             <div class="flex items-center space-x-3.5">
               <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center font-black text-white text-xs shadow-md shadow-sky-500/25">O</div>
               <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
@@ -2220,12 +2139,9 @@
           </div>
         </section>
 
-        <!-- Site Footer with Progressive Blur & Ambient Lighting -->
-        <footer class="footer-progressive-blur text-white py-14 px-6 sm:px-8 relative">
-          <!-- Progressive Feathering Blur Veil -->
-          <div class="footer-progressive-veil"></div>
-
-          <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400 relative z-10">
+        <!-- Site Footer -->
+        <footer class="bg-slate-900 text-white border-t border-slate-800 py-12 px-6 sm:px-8">
+          <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
             <div class="flex items-center space-x-3.5">
               <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center font-black text-white text-xs shadow-md shadow-sky-500/25">O</div>
               <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
@@ -2478,12 +2394,9 @@
           </div>
         </section>
 
-        <!-- Site Footer with Progressive Blur & Ambient Lighting -->
-        <footer class="footer-progressive-blur text-white py-14 px-6 sm:px-8 relative">
-          <!-- Progressive Feathering Blur Veil -->
-          <div class="footer-progressive-veil"></div>
-
-          <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400 relative z-10">
+        <!-- Site Footer -->
+        <footer class="bg-slate-900 text-white border-t border-slate-800 py-12 px-6 sm:px-8">
+          <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
             <div class="flex items-center space-x-3.5">
               <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-400 flex items-center justify-center font-black text-white text-xs shadow-md shadow-sky-500/25">O</div>
               <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
