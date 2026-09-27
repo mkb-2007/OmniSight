@@ -10,7 +10,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "push": "node scripts/git-push.cjs",
+    "watch:push": "node scripts/git-watch-push.cjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
