@@ -2423,87 +2423,87 @@
     </template>
     <!-- ========================================================================= -->
     <template x-if="currentView === 'portal-select'">
-      <section class="w-full relative min-h-screen bg-cover bg-center bg-no-repeat flex flex-col justify-between overflow-hidden page-enter"
+      <section class="w-full relative min-h-[100svh] lg:h-[100svh] lg:max-h-screen bg-cover bg-center bg-no-repeat flex flex-col justify-between overflow-y-auto lg:overflow-hidden page-enter"
         style="background-image: url('/portal-background.jpg');">
         
         <!-- Clean Atmospheric Daylight Tint (No Full-Page Blur) -->
         <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-white/10 to-white/20 pointer-events-none"></div>
 
       <!-- Top Navigation Row: Back to Home Link & Brand Logo -->
-      <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 pt-6 w-full flex items-center justify-between">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 w-full flex items-center justify-between shrink-0">
         <button @click="navigateLanding()"
-          class="inline-flex items-center space-x-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 bg-white/85 hover:bg-white border border-white/90 px-4 py-2 rounded-full shadow-xs backdrop-blur-md transition-all duration-200 cursor-pointer group">
+          class="inline-flex items-center space-x-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 bg-white/85 hover:bg-white border border-white/90 px-3.5 py-1.5 rounded-full shadow-xs backdrop-blur-md transition-all duration-200 cursor-pointer group">
           <span class="group-hover:-translate-x-1 transition-transform">←</span>
           <span>Back to Home</span>
         </button>
 
         <button @click="navigateLanding()" class="flex items-center space-x-2 group cursor-pointer focus:outline-hidden" title="OmniSight Home">
-          <img src="/omnisight-logo-transparent.png" alt="OmniSight" class="h-8 sm:h-9 w-auto object-contain transition duration-200 group-hover:scale-105 drop-shadow-xs" />
+          <img src="/omnisight-logo-transparent.png" alt="OmniSight" class="h-7 sm:h-8 w-auto object-contain transition duration-200 group-hover:scale-105 drop-shadow-xs" />
         </button>
       </div>
 
       <!-- Main Center Content -->
-      <div class="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 py-6 sm:py-10 w-full flex-1 flex flex-col justify-center items-center">
+      <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-1 sm:py-2.5 w-full flex-1 min-h-0 flex flex-col justify-center items-center">
         
         <!-- Header Text Block -->
-        <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <div class="text-[11px] font-mono font-bold tracking-[0.24em] text-[#0077b6] uppercase mb-2">
+        <div class="text-center max-w-2xl mx-auto mb-2.5 sm:mb-3.5 lg:mb-4 shrink-0">
+          <div class="text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.24em] text-[#0077b6] uppercase mb-1">
             OMNISIGHT
           </div>
-          <h1 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold tracking-tight text-slate-900 leading-tight">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
             Choose Your <span class="bg-gradient-to-r from-[#0077b6] via-[#0096c7] to-[#00b4d8] bg-clip-text text-transparent">Portal</span>
           </h1>
-          <p class="text-sm sm:text-base text-slate-600 mt-2.5 font-normal">
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 font-normal">
             Sign in to access your dashboard and make a difference.
           </p>
         </div>
 
         <!-- Exactly THREE Interactive Glassmorphism Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 w-full max-w-5xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4 lg:gap-5 xl:gap-6 w-full max-w-5xl">
           
           <!-- 1. CITY PORTAL CARD -->
           <div @click="openLogin('city')"
-            class="group relative bg-white/85 hover:bg-white/98 border border-white/90 hover:border-sky-400/60 rounded-[30px] p-6 sm:p-7 shadow-xl shadow-slate-900/5 hover:shadow-2xl hover:shadow-cyan-500/20 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between overflow-hidden stagger-1 interactive-card">
+            class="group relative bg-white/85 hover:bg-white/98 border border-white/90 hover:border-sky-400/60 rounded-2xl sm:rounded-[22px] p-4 lg:p-5 shadow-lg shadow-slate-900/5 hover:shadow-2xl hover:shadow-cyan-500/20 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between overflow-hidden stagger-1 interactive-card">
             
             <!-- Top Glowing Accent Line -->
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-sky-500 via-cyan-400 to-blue-600 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-500 via-cyan-400 to-blue-600 opacity-60 group-hover:opacity-100 transition-opacity"></div>
 
             <!-- Card Body -->
             <div class="flex flex-col items-center text-center">
               <!-- Top Role Badge -->
-              <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-sky-500/10 text-sky-700 border border-sky-500/20 mb-3.5">
+              <div class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase bg-sky-500/10 text-sky-700 border border-sky-500/20 mb-2 sm:mb-2.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
                 <span>MACRO OVERSIGHT</span>
               </div>
 
               <!-- Icon: City / Buildings -->
-              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 text-white flex items-center justify-center shadow-lg shadow-sky-500/25 group-hover:scale-105 group-hover:shadow-sky-500/40 transition-all duration-300">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 text-white flex items-center justify-center shadow-md shadow-sky-500/25 group-hover:scale-105 group-hover:shadow-sky-500/40 transition-all duration-300">
+                <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
 
               <!-- Title -->
-              <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-4 tracking-tight group-hover:text-sky-600 transition-colors">
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-2 sm:mt-2.5 tracking-tight group-hover:text-sky-600 transition-colors">
                 City Portal
               </h2>
 
               <!-- Description -->
-              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed font-normal min-h-[56px]">
+              <p class="text-xs text-slate-600 mt-1 leading-snug sm:leading-relaxed font-normal min-h-[38px] sm:min-h-[42px]">
                 City-wide infrastructure conditions, economic drain calculations, and spatial GIS heatmaps.
               </p>
 
               <!-- Feature Micro-Chips -->
-              <div class="flex flex-wrap justify-center gap-1.5 my-3">
-                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[10px] font-mono font-medium">₹3.5M Drain Math</span>
-                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[10px] font-mono font-medium">15 Zones GIS</span>
+              <div class="flex flex-wrap justify-center gap-1.5 my-1.5 sm:my-2">
+                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[9px] sm:text-[10px] font-mono font-medium">₹3.5M Drain Math</span>
+                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[9px] sm:text-[10px] font-mono font-medium">15 Zones GIS</span>
               </div>
 
               <!-- Action Indicator -->
-              <div class="mt-2 mb-2 flex items-center space-x-2 text-xs font-bold text-sky-600 group-hover:text-sky-700">
+              <div class="mt-1 mb-1 sm:mt-1.5 sm:mb-1.5 flex items-center space-x-1.5 text-xs font-bold text-sky-600 group-hover:text-sky-700">
                 <span>Enter Portal</span>
-                <div class="w-8 h-8 rounded-full bg-sky-500/10 group-hover:bg-sky-500 text-sky-600 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs">
-                  <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-sky-500/10 group-hover:bg-sky-500 text-sky-600 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs">
+                  <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </div>
@@ -2511,55 +2511,55 @@
             </div>
 
             <!-- Lower Contextual Illustration: City Skyline -->
-            <div class="mt-2 w-full pt-1 border-t border-slate-100/80 overflow-hidden">
-              <img src="/portal-ill-city-clean.png" alt="City Skyline Illustration" class="w-full h-24 object-contain object-bottom transition-all duration-300 group-hover:scale-104 group-hover:brightness-105" />
+            <div class="mt-1 w-full pt-1 border-t border-slate-100/80 overflow-hidden">
+              <img src="/portal-ill-city-clean.png" alt="City Skyline Illustration" class="w-full h-14 sm:h-16 lg:h-18 xl:h-20 object-contain object-bottom transition-all duration-300 group-hover:scale-104 group-hover:brightness-105" />
             </div>
           </div>
 
           <!-- 2. WARD PORTAL CARD -->
           <div @click="openLogin('ward')"
-            class="group relative bg-white/85 hover:bg-white/98 border border-white/90 hover:border-emerald-400/60 rounded-[30px] p-6 sm:p-7 shadow-xl shadow-slate-900/5 hover:shadow-2xl hover:shadow-emerald-500/20 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between overflow-hidden stagger-2 interactive-card">
+            class="group relative bg-white/85 hover:bg-white/98 border border-white/90 hover:border-emerald-400/60 rounded-2xl sm:rounded-[22px] p-4 lg:p-5 shadow-lg shadow-slate-900/5 hover:shadow-2xl hover:shadow-emerald-500/20 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between overflow-hidden stagger-2 interactive-card">
             
             <!-- Top Glowing Accent Line -->
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-teal-500 via-emerald-400 to-green-600 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-emerald-400 to-green-600 opacity-60 group-hover:opacity-100 transition-opacity"></div>
 
             <!-- Card Body -->
             <div class="flex flex-col items-center text-center">
               <!-- Top Role Badge -->
-              <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 mb-3.5">
+              <div class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 mb-2 sm:mb-2.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span>FIELD TRIAGE & SLA</span>
               </div>
 
               <!-- Icon: Map / Location -->
-              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shadow-lg shadow-emerald-500/25 group-hover:scale-105 group-hover:shadow-emerald-500/40 transition-all duration-300">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/25 group-hover:scale-105 group-hover:shadow-emerald-500/40 transition-all duration-300">
+                <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
 
               <!-- Title -->
-              <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-4 tracking-tight group-hover:text-emerald-700 transition-colors">
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-2 sm:mt-2.5 tracking-tight group-hover:text-emerald-700 transition-colors">
                 Ward Portal
               </h2>
 
               <!-- Description -->
-              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed font-normal min-h-[56px]">
+              <p class="text-xs text-slate-600 mt-1 leading-snug sm:leading-relaxed font-normal min-h-[38px] sm:min-h-[42px]">
                 Zone-level work order triage, 48hr SLA timer countdowns, contractor verification, and repair audit logs.
               </p>
 
               <!-- Feature Micro-Chips -->
-              <div class="flex flex-wrap justify-center gap-1.5 my-3">
-                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[10px] font-mono font-medium">48h SLA Timers</span>
-                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[10px] font-mono font-medium">Kanban Dispatch</span>
+              <div class="flex flex-wrap justify-center gap-1.5 my-1.5 sm:my-2">
+                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[9px] sm:text-[10px] font-mono font-medium">48h SLA Timers</span>
+                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[9px] sm:text-[10px] font-mono font-medium">Kanban Dispatch</span>
               </div>
 
               <!-- Action Indicator -->
-              <div class="mt-2 mb-2 flex items-center space-x-2 text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
+              <div class="mt-1 mb-1 sm:mt-1.5 sm:mb-1.5 flex items-center space-x-1.5 text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
                 <span>Enter Portal</span>
-                <div class="w-8 h-8 rounded-full bg-emerald-500/10 group-hover:bg-emerald-500 text-emerald-600 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs">
-                  <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-emerald-500/10 group-hover:bg-emerald-500 text-emerald-600 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs">
+                  <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </div>
@@ -2567,55 +2567,55 @@
             </div>
 
             <!-- Lower Contextual Illustration: Neighborhood / Map -->
-            <div class="mt-2 w-full pt-1 border-t border-slate-100/80 overflow-hidden">
-              <img src="/portal-ill-ward-clean.png" alt="Ward Neighborhood Illustration" class="w-full h-24 object-contain object-bottom transition-all duration-300 group-hover:scale-104 group-hover:brightness-105" />
+            <div class="mt-1 w-full pt-1 border-t border-slate-100/80 overflow-hidden">
+              <img src="/portal-ill-ward-clean.png" alt="Ward Neighborhood Illustration" class="w-full h-14 sm:h-16 lg:h-18 xl:h-20 object-contain object-bottom transition-all duration-300 group-hover:scale-104 group-hover:brightness-105" />
             </div>
           </div>
 
           <!-- 3. DEVELOPER PORTAL CARD -->
           <div @click="openLogin('dev')"
-            class="group relative bg-white/85 hover:bg-white/98 border border-white/90 hover:border-purple-400/60 rounded-[30px] p-6 sm:p-7 shadow-xl shadow-slate-900/5 hover:shadow-2xl hover:shadow-purple-500/20 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col justify-between overflow-hidden stagger-3 interactive-card">
+            class="group relative bg-white/85 hover:bg-white/98 border border-white/90 hover:border-purple-400/60 rounded-2xl sm:rounded-[22px] p-4 lg:p-5 shadow-lg shadow-slate-900/5 hover:shadow-2xl hover:shadow-purple-500/20 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between overflow-hidden stagger-3 interactive-card">
             
             <!-- Top Glowing Accent Line -->
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-60 group-hover:opacity-100 transition-opacity"></div>
 
             <!-- Card Body -->
             <div class="flex flex-col items-center text-center">
               <!-- Top Role Badge -->
-              <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-purple-500/10 text-purple-700 border border-purple-500/20 mb-3.5">
+              <div class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase bg-purple-500/10 text-purple-700 border border-purple-500/20 mb-2 sm:mb-2.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
                 <span>EDGE MESH & HARDWARE</span>
               </div>
 
               <!-- Icon: Settings / Gear -->
-              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:scale-105 group-hover:shadow-purple-500/40 transition-all duration-300">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-md shadow-purple-500/25 group-hover:scale-105 group-hover:shadow-purple-500/40 transition-all duration-300">
+                <svg class="w-5 h-5 sm:w-5.5 sm:h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
 
               <!-- Title -->
-              <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-4 tracking-tight group-hover:text-purple-700 transition-colors">
+              <h2 class="text-lg sm:text-xl font-black text-slate-900 mt-2 sm:mt-2.5 tracking-tight group-hover:text-purple-700 transition-colors">
                 Developer Portal
               </h2>
 
               <!-- Description -->
-              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed font-normal min-h-[56px]">
+              <p class="text-xs text-slate-600 mt-1 leading-snug sm:leading-relaxed font-normal min-h-[38px] sm:min-h-[42px]">
                 Jetson Orin fleet health, LiDAR calibration, edge inference benchmarks, and OTA model distribution.
               </p>
 
               <!-- Feature Micro-Chips -->
-              <div class="flex flex-wrap justify-center gap-1.5 my-3">
-                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[10px] font-mono font-medium">Jetson Orin Pods</span>
-                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[10px] font-mono font-medium">30 FPS Inference</span>
+              <div class="flex flex-wrap justify-center gap-1.5 my-1.5 sm:my-2">
+                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[9px] sm:text-[10px] font-mono font-medium">Jetson Orin Pods</span>
+                <span class="px-2 py-0.5 rounded-md bg-slate-100/90 text-slate-700 text-[9px] sm:text-[10px] font-mono font-medium">30 FPS Inference</span>
               </div>
 
               <!-- Action Indicator -->
-              <div class="mt-2 mb-2 flex items-center space-x-2 text-xs font-bold text-purple-600 group-hover:text-purple-700">
+              <div class="mt-1 mb-1 sm:mt-1.5 sm:mb-1.5 flex items-center space-x-1.5 text-xs font-bold text-purple-600 group-hover:text-purple-700">
                 <span>Enter Portal</span>
-                <div class="w-8 h-8 rounded-full bg-purple-500/10 group-hover:bg-purple-500 text-purple-600 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs">
-                  <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-purple-500/10 group-hover:bg-purple-500 text-purple-600 group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs">
+                  <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </div>
@@ -2623,8 +2623,8 @@
             </div>
 
             <!-- Lower Contextual Illustration: Servers & Connected Bus -->
-            <div class="mt-2 w-full pt-1 border-t border-slate-100/80 overflow-hidden">
-              <img src="/portal-ill-dev-clean.png" alt="Developer Telemetry Illustration" class="w-full h-24 object-contain object-bottom transition-all duration-300 group-hover:scale-104 group-hover:brightness-105" />
+            <div class="mt-1 w-full pt-1 border-t border-slate-100/80 overflow-hidden">
+              <img src="/portal-ill-dev-clean.png" alt="Developer Telemetry Illustration" class="w-full h-14 sm:h-16 lg:h-18 xl:h-20 object-contain object-bottom transition-all duration-300 group-hover:scale-104 group-hover:brightness-105" />
             </div>
           </div>
 
@@ -2633,12 +2633,12 @@
       </div>
 
       <!-- Bottom Atmospheric Status Bar -->
-      <div class="relative z-10 w-full px-6 sm:px-8 py-3.5 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-500 bg-white/70 backdrop-blur-md border-t border-white/60">
+      <div class="relative z-10 w-full px-6 sm:px-8 py-2 sm:py-2.5 flex flex-col sm:flex-row items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-500 bg-white/70 backdrop-blur-md border-t border-white/60 shrink-0">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
           <span>Greater Chennai Corporation • Integrated Road Operations Center (IROC)</span>
         </div>
-        <div class="mt-1 sm:mt-0">Edge Fleet Telemetry Active • v4.8.2-prod</div>
+        <div class="mt-0.5 sm:mt-0">Edge Fleet Telemetry Active • v4.8.2-prod</div>
       </div>
 
     </section>
