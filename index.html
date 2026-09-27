@@ -25,8 +25,13 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Application Error Boundary Script -->
+  <!-- Application Error Boundary & Scroll Restoration Script -->
   <script>
+    // Disable native browser scroll restoration so application strictly controls route entry scroll positions (X=0, Y=0)
+    if (typeof window !== 'undefined' && 'scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
     window.addEventListener('error', function(e) {
       console.error('[OmniSight Global Error]', e.error || e.message);
       if (!window.omniAppMounted) {
@@ -4837,8 +4842,27 @@
         // ------------------------------------------------------------------
         async initApp() {
           window.omniAppMounted = true;
-          window.addEventListener('hashchange', () => this.handleRoute());
-          window.addEventListener('popstate', () => this.handleRoute());
+
+          // Disable browser automatic scroll restoration so app strictly controls top reset
+          if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+          }
+
+          window.addEventListener('hashchange', () => {
+            this.handleRoute();
+            this.resetScrollToTop();
+          });
+          window.addEventListener('popstate', () => {
+            this.handleRoute();
+            this.resetScrollToTop();
+          });
+
+          // Watch view and tab changes to ensure instant scroll to top on every route change
+          this.$watch('currentView', () => this.resetScrollToTop());
+          this.$watch('cityTab', () => this.resetScrollToTop());
+          this.$watch('wardTab', () => this.resetScrollToTop());
+          this.$watch('devTab', () => this.resetScrollToTop());
+
           this.startStartupSequence();
           this.startClock();
           this.startTickerIncrement();
@@ -4847,6 +4871,7 @@
           // Initialize single reliable authentication state
           await this.verifySession();
           this.handleRoute();
+          this.resetScrollToTop();
         },
 
         getApiUrl(path) {
@@ -5059,6 +5084,56 @@
         // Navigation & Multi-Page Routing
         // ------------------------------------------------------------------
         // ------------------------------------------------------------------
+        // Centralized Scroll Restoration Control (Always start routes at TOP: X=0, Y=0)
+        // ------------------------------------------------------------------
+        resetScrollToTop() {
+          const performReset = () => {
+            if (typeof window !== 'undefined') {
+              const root = document.documentElement;
+              const prevBehavior = root ? root.style.scrollBehavior : '';
+              if (root) root.style.scrollBehavior = 'auto';
+
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'instant'
+              });
+
+              if (root) {
+                root.scrollTop = 0;
+                root.scrollLeft = 0;
+              }
+              if (document.body) {
+                document.body.scrollTop = 0;
+                document.body.scrollLeft = 0;
+              }
+
+              // Also zero-out any active inner scrollable containers (e.g. dashboard sections, main)
+              const scrollables = document.querySelectorAll('main, section, [class*="overflow-y-auto"], .overflow-y-auto');
+              scrollables.forEach(el => {
+                if (el.scrollTop !== 0) el.scrollTop = 0;
+                if (el.scrollLeft !== 0) el.scrollLeft = 0;
+              });
+
+              if (root) root.style.scrollBehavior = prevBehavior;
+            }
+          };
+
+          // 1. Immediate synchronous reset
+          performReset();
+
+          // 2. NextTick reset after Alpine conditionally mounts the new view into DOM
+          if (this.$nextTick) {
+            this.$nextTick(() => {
+              performReset();
+              requestAnimationFrame(performReset);
+            });
+          } else {
+            requestAnimationFrame(performReset);
+          }
+        },
+
+        // ------------------------------------------------------------------
         // Single-Entry History Management (Fixes Click Back Twice Issue)
         // ------------------------------------------------------------------
         pushRoute(path, state = {}) {
@@ -5092,9 +5167,7 @@
           };
           const targetPath = pathMap[view] || ('/' + view);
           this.pushRoute(targetPath, { view });
-          this.$nextTick(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
+          this.resetScrollToTop();
         },
 
         handleRoute() {
@@ -5115,6 +5188,7 @@
             this.currentView = 'landing';
             this.activeSection = 'hero';
             this.showLoginModal = false;
+            this.resetScrollToTop();
             return;
           }
 
@@ -5122,28 +5196,28 @@
           if (section === 'about') {
             this.currentView = 'about';
             this.showLoginModal = false;
-            this.$nextTick(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            this.resetScrollToTop();
             return;
           }
 
           if (section === 'features') {
             this.currentView = 'features';
             this.showLoginModal = false;
-            this.$nextTick(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            this.resetScrollToTop();
             return;
           }
 
           if (section === 'impact') {
             this.currentView = 'impact';
             this.showLoginModal = false;
-            this.$nextTick(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            this.resetScrollToTop();
             return;
           }
 
           if (section === 'contact') {
             this.currentView = 'contact';
             this.showLoginModal = false;
-            this.$nextTick(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            this.resetScrollToTop();
             return;
           }
 
@@ -5154,9 +5228,7 @@
             } else {
               this.currentView = 'portal-select';
               this.showLoginModal = false;
-              this.$nextTick(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              });
+              this.resetScrollToTop();
             }
             return;
           }
@@ -5173,7 +5245,7 @@
               this.fillUnifiedDemo(target);
               this.currentView = 'login';
               this.showLoginModal = false;
-              this.$nextTick(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+              this.resetScrollToTop();
             }
             return;
           }
@@ -5195,6 +5267,7 @@
             else if (sub === 'analytics' || sub === 'economic') this.cityTab = 'economic';
             else if (sub === 'leaderboard') this.cityTab = 'leaderboard';
             this.loadPortalData('city');
+            this.resetScrollToTop();
             return;
           }
 
@@ -5215,6 +5288,7 @@
             else if (sub === 'repairs' || sub === 'verification') this.wardTab = 'verification';
             else if (sub === 'settings') this.wardTab = 'settings';
             this.loadPortalData('ward');
+            this.resetScrollToTop();
             return;
           }
 
@@ -5238,10 +5312,12 @@
             else if (sub === 'hardware' || sub === 'mgmt') this.devTab = 'devices';
             else if (sub === 'api') this.devTab = 'api';
             this.loadPortalData('dev');
+            this.resetScrollToTop();
             return;
           }
 
           this.currentView = 'landing';
+          this.resetScrollToTop();
         },
 
         redirectToAuthorizedPortal() {
@@ -5262,18 +5338,21 @@
             this.pushRoute('/developer', { view: 'dev' });
             this.loadPortalData('dev');
           }
+          this.resetScrollToTop();
         },
 
         setCityTab(tab) {
           this.cityTab = tab;
           const subPath = tab === 'economic' ? 'analytics' : (tab === 'budget' ? 'hazards' : tab);
           this.replaceRoute('/city/' + subPath);
+          this.resetScrollToTop();
         },
 
         setWardTab(tab) {
           this.wardTab = tab;
           const subPath = tab === 'kanban' ? 'incidents' : (tab === 'triage' ? 'map' : tab);
           this.replaceRoute('/ward/' + subPath);
+          this.resetScrollToTop();
         },
 
         get selectedBus() {
@@ -5356,6 +5435,7 @@
           };
           const subPath = subMapping[tab] || tab;
           this.replaceRoute('/developer/' + subPath);
+          this.resetScrollToTop();
         },
 
         // ------------------------------------------------------------------
@@ -5370,9 +5450,7 @@
           this.currentView = 'portal-select';
           this.showLoginModal = false;
           this.pushRoute('/portal-select', { view: 'portal-select' });
-          this.$nextTick(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
+          this.resetScrollToTop();
         },
 
         async submitContact() {
@@ -5482,10 +5560,7 @@
 
           const portalSlug = target === 'dev' ? 'developer' : target;
           this.pushRoute('/login/' + portalSlug, { view: 'login', portal: target });
-
-          this.$nextTick(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
+          this.resetScrollToTop();
         },
 
         closeLoginModal() {
@@ -5580,6 +5655,7 @@
               this.currentView = 'landing';
               this.pushRoute('/', { view: 'landing' });
             }
+            this.resetScrollToTop();
           } catch (e) {
             console.error('[Login Connection Error]', e);
             this.loginError = 'Unable to connect to the authentication service. Please try again.';
@@ -5596,6 +5672,7 @@
           this.activeSection = 'hero';
           this.showLoginModal = false;
           this.pushRoute('/', { view: 'landing' });
+          this.resetScrollToTop();
         },
 
         navigateLanding() {
@@ -5604,9 +5681,7 @@
           this.activeSection = 'hero';
           this.showLoginModal = false;
           this.pushRoute('/', { view: 'landing' });
-          this.$nextTick(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          });
+          this.resetScrollToTop();
         },
 
         // ------------------------------------------------------------------
