@@ -440,7 +440,7 @@
       "etaMinutes": 18,
       "notes": "Cold mix asphalt team arrived on site",
       "createdAt": "2026-09-23T18:26:20.215Z",
-      "updatedAt": "2026-09-23T20:26:36.236Z"
+      "updatedAt": "2026-09-24T05:31:42.056Z"
     },
     {
       "id": "inc-2",
@@ -516,6 +516,20 @@
       "id": "inc-1790195196228-329",
       "createdAt": "2026-09-23T20:26:36.228Z",
       "ticketNumber": "WO-5412",
+      "title": "Emergency Rapid Patch - HAZ-1049",
+      "type": "Single Pothole (L1)",
+      "priority": "L1",
+      "status": "IN_PROGRESS",
+      "hazardId": "haz-1",
+      "wardId": "ward-13",
+      "contractor": "Coromandel Infrastructure Ltd (Unit #3)",
+      "etaMinutes": 18,
+      "notes": "Dispatched immediately by S. Vengatesan (Executive Engineer, Zone 13)"
+    },
+    {
+      "id": "inc-1790227902037-488",
+      "createdAt": "2026-09-24T05:31:42.037Z",
+      "ticketNumber": "WO-9523",
       "title": "Emergency Rapid Patch - HAZ-1049",
       "type": "Single Pothole (L1)",
       "priority": "L1",
@@ -637,8 +651,8 @@
       "createdAt": "2026-09-23T18:26:20.215Z",
       "geoDeltaMeters": 3.42,
       "textureMatchPercent": 97.4,
-      "verifiedAt": "2026-09-23T20:26:36.237Z",
-      "updatedAt": "2026-09-23T20:26:36.259Z"
+      "verifiedAt": "2026-09-24T05:31:42.057Z",
+      "updatedAt": "2026-09-24T05:31:42.077Z"
     },
     {
       "id": "rep-2",
@@ -719,6 +733,15 @@
     {
       "id": "sta-1790195196219-405",
       "createdAt": "2026-09-23T20:26:36.219Z",
+      "incidentId": "inc-1",
+      "previousStatus": "RESOLVED",
+      "newStatus": "IN_PROGRESS",
+      "changedByUserId": "usr-ward",
+      "notes": "Cold mix asphalt team arrived on site"
+    },
+    {
+      "id": "sta-1790227902029-413",
+      "createdAt": "2026-09-24T05:31:42.029Z",
       "incidentId": "inc-1",
       "previousStatus": "RESOLVED",
       "newStatus": "IN_PROGRESS",
@@ -1453,6 +1476,287 @@
       "createdAt": "2026-09-24T05:13:56.985Z",
       "action": "CONTACT_INQUIRY_SUBMITTED",
       "details": "From: Commissioner Office (commissioner@chennaicorporation.gov.in) | Org: Greater Chennai Corporation | Subject: Phase 2 Bus Pod Fleet Rollout"
+    },
+    {
+      "id": "aud-1790227558880-81",
+      "createdAt": "2026-09-24T05:25:58.880Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790227743669-274",
+      "createdAt": "2026-09-24T05:29:03.669Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790227743837-975",
+      "createdAt": "2026-09-24T05:29:03.837Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790227743998-287",
+      "createdAt": "2026-09-24T05:29:03.998Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790227798255-806",
+      "createdAt": "2026-09-24T05:29:58.255Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790227798398-782",
+      "createdAt": "2026-09-24T05:29:58.398Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790227798534-479",
+      "createdAt": "2026-09-24T05:29:58.534Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790227798673-927",
+      "createdAt": "2026-09-24T05:29:58.673Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_FAILED_BAD_PASSWORD",
+      "details": "Failed password attempt for user ward_admin"
+    },
+    {
+      "id": "aud-1790227798677-715",
+      "createdAt": "2026-09-24T05:29:58.677Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User fake_user_id not found for portal: ward"
+    },
+    {
+      "id": "aud-1790227798812-86",
+      "createdAt": "2026-09-24T05:29:58.812Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_REJECTED_WRONG_PORTAL",
+      "details": "User role WARD attempted unauthorized access to city portal."
+    },
+    {
+      "id": "aud-1790227901351-437",
+      "createdAt": "2026-09-24T05:31:41.351Z",
+      "userId": "usr-city",
+      "action": "LOGIN_FAILED_BAD_PASSWORD",
+      "details": "Failed password attempt for user city_admin"
+    },
+    {
+      "id": "aud-1790227901357-874",
+      "createdAt": "2026-09-24T05:31:41.357Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User non_existent_user not found for portal: ANY"
+    },
+    {
+      "id": "aud-1790227901525-609",
+      "createdAt": "2026-09-24T05:31:41.525Z",
+      "userId": "usr-city",
+      "action": "LOGIN_REJECTED_WRONG_PORTAL",
+      "details": "User role CITY attempted unauthorized access to ward portal."
+    },
+    {
+      "id": "aud-1790227901688-603",
+      "createdAt": "2026-09-24T05:31:41.688Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790227901847-103",
+      "createdAt": "2026-09-24T05:31:41.847Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790227902008-999",
+      "createdAt": "2026-09-24T05:31:42.008Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790227902031-680",
+      "createdAt": "2026-09-24T05:31:42.031Z",
+      "userId": "usr-ward",
+      "action": "WARD_INCIDENT_UPDATED",
+      "details": "Incident WO-1049 updated by S. Vengatesan (Executive Engineer, Zone 13)."
+    },
+    {
+      "id": "aud-1790227902039-105",
+      "createdAt": "2026-09-24T05:31:42.039Z",
+      "userId": "usr-ward",
+      "action": "DISPATCH_L1_CREW",
+      "details": "Emergency L1 patch crew dispatched for HAZ-1049 under ticket WO-9523."
+    },
+    {
+      "id": "aud-1790227902060-481",
+      "createdAt": "2026-09-24T05:31:42.060Z",
+      "userId": "usr-ward",
+      "action": "VERIFICATION_AUDIT",
+      "details": "Ticket WO-1049 audit completed with verdict: PASSED."
+    },
+    {
+      "id": "aud-1790227902071-379",
+      "createdAt": "2026-09-24T05:31:42.071Z",
+      "userId": "usr-dev",
+      "action": "OTA_FIRMWARE_CALIBRATION",
+      "details": "Calibration broadcast: Cutoff=20Hz, Buffer=400ms, Spike=2.5G to 142 nodes."
+    },
+    {
+      "id": "aud-1790227902080-418",
+      "createdAt": "2026-09-24T05:31:42.080Z",
+      "userId": "usr-city",
+      "action": "BUDGET_APPROVED",
+      "details": "Approved repair budget ₹65000 for ticket WO-1049."
+    },
+    {
+      "id": "aud-1790228691947-458",
+      "createdAt": "2026-09-24T05:44:51.947Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790228692099-740",
+      "createdAt": "2026-09-24T05:44:52.099Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790228692246-898",
+      "createdAt": "2026-09-24T05:44:52.246Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790228698508-296",
+      "createdAt": "2026-09-24T05:44:58.508Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790228698656-261",
+      "createdAt": "2026-09-24T05:44:58.656Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790228698795-725",
+      "createdAt": "2026-09-24T05:44:58.795Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to developer portal."
+    },
+    {
+      "id": "aud-1790228698930-437",
+      "createdAt": "2026-09-24T05:44:58.930Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_FAILED_BAD_PASSWORD",
+      "details": "Failed password attempt for user ward_admin"
+    },
+    {
+      "id": "aud-1790228698935-223",
+      "createdAt": "2026-09-24T05:44:58.935Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User fake_user_id not found for portal: ward"
+    },
+    {
+      "id": "aud-1790228699082-278",
+      "createdAt": "2026-09-24T05:44:59.082Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_REJECTED_WRONG_PORTAL",
+      "details": "User role WARD attempted unauthorized access to city portal."
+    },
+    {
+      "id": "aud-1790229091632-896",
+      "createdAt": "2026-09-24T05:51:31.632Z",
+      "action": "LOGIN_FAILED_NOT_FOUND",
+      "details": "User invalid_user not found for portal: city"
+    },
+    {
+      "id": "aud-1790229091769-386",
+      "createdAt": "2026-09-24T05:51:31.769Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790229091908-672",
+      "createdAt": "2026-09-24T05:51:31.908Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790315606358-653",
+      "createdAt": "2026-09-25T05:53:26.359Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_FAILED_BAD_PASSWORD",
+      "details": "Failed password attempt for user ward_admin"
+    },
+    {
+      "id": "aud-1790315614431-410",
+      "createdAt": "2026-09-25T05:53:34.431Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790315662746-218",
+      "createdAt": "2026-09-25T05:54:22.746Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790317165930-784",
+      "createdAt": "2026-09-25T06:19:25.930Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to ward portal."
+    },
+    {
+      "id": "aud-1790317179519-56",
+      "createdAt": "2026-09-25T06:19:39.519Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to city portal."
+    },
+    {
+      "id": "aud-1790321296816-897",
+      "createdAt": "2026-09-25T07:28:16.816Z",
+      "userId": "usr-ward",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to WARD portal."
+    },
+    {
+      "id": "aud-1790321303548-375",
+      "createdAt": "2026-09-25T07:28:23.548Z",
+      "userId": "usr-city",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to CITY portal."
+    },
+    {
+      "id": "aud-1790321303631-517",
+      "createdAt": "2026-09-25T07:28:23.631Z",
+      "userId": "usr-dev",
+      "action": "LOGIN_SUCCESS",
+      "details": "Signed in to DEVELOPER portal."
     }
   ]
 }
