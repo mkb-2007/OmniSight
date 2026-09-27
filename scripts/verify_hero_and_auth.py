@@ -32,10 +32,9 @@ def test_hero_and_auth():
         assert p in html, f"Pillar '{p}' missing from hero!"
     print("  -> PASS: All 4 value pillars present in hero (Safer Commute, Data-Driven Decisions, Lower Maintenance Cost, Sustainable Cities)")
 
-    # Right side visual & bottom skyline
+    # Right side visual
     assert "hero-bus-visual.jpg" in html, "Hero bus visual missing!"
-    assert "hero-skyline.png" in html, "Hero skyline sketch missing!"
-    print("  -> PASS: Hero bus visual and landmark skyline present")
+    print("  -> PASS: Hero bus visual present (clean skyline without obsolete mockup sketch)")
 
     # Confirm NO portal cards in hero
     assert "3 Minimal Cards" not in html, "Found old portal card container!"
