@@ -758,7 +758,7 @@
   </div>
 
   <!-- GLOBAL HEADER (OmniSight Navigation & Unified Entry) -->
-  <header x-show="currentView !== 'login'" class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-6 sm:px-8 py-3.5 flex items-center justify-between shadow-xs transition-all">
+  <header x-show="currentView !== 'login' && currentView !== 'portal-select'" class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-6 sm:px-8 py-3.5 flex items-center justify-between shadow-xs transition-all">
     <!-- Left: OmniSight Logo & Tagline -->
     <div class="flex items-center space-x-4">
       <button @click="navigateLanding()" class="flex items-center space-x-3 group focus:outline-hidden text-left cursor-pointer">
@@ -927,7 +927,7 @@
   </header>
 
   <!-- MOBILE NAVIGATION DROPDOWN (Responsive Navigation Menu) -->
-  <div x-show="mobileMenuOpen && authState !== 'AUTHENTICATED'"
+  <div x-show="mobileMenuOpen && authState !== 'AUTHENTICATED' && currentView !== 'login' && currentView !== 'portal-select'"
        x-transition:enter="transition ease-out duration-200"
        x-transition:enter-start="opacity-0 -translate-y-2"
        x-transition:enter-end="opacity-100 translate-y-0"
@@ -2424,18 +2424,22 @@
     </template>
     <!-- ========================================================================= -->
     <template x-if="currentView === 'portal-select'">
-      <section class="w-full relative min-h-[calc(100vh-68px)] bg-cover bg-center bg-no-repeat flex flex-col justify-between overflow-hidden page-enter"
+      <section class="w-full relative min-h-screen bg-cover bg-center bg-no-repeat flex flex-col justify-between overflow-hidden page-enter"
         style="background-image: url('/portal-background.jpg');">
         
         <!-- Clean Atmospheric Daylight Tint (No Full-Page Blur) -->
         <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-white/10 to-white/20 pointer-events-none"></div>
 
-      <!-- Top Navigation Row: Back to Home Link -->
-      <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 pt-6 w-full">
+      <!-- Top Navigation Row: Back to Home Link & Brand Logo -->
+      <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 pt-6 w-full flex items-center justify-between">
         <button @click="navigateLanding()"
-          class="inline-flex items-center space-x-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 bg-white/75 hover:bg-white/95 border border-white/80 px-4 py-2 rounded-full shadow-xs backdrop-blur-md transition-all duration-200 cursor-pointer group">
+          class="inline-flex items-center space-x-2 text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 bg-white/85 hover:bg-white border border-white/90 px-4 py-2 rounded-full shadow-xs backdrop-blur-md transition-all duration-200 cursor-pointer group">
           <span class="group-hover:-translate-x-1 transition-transform">←</span>
           <span>Back to Home</span>
+        </button>
+
+        <button @click="navigateLanding()" class="flex items-center space-x-2 group cursor-pointer focus:outline-hidden">
+          <img src="/omnisight-header-logo.png" alt="OmniSight" class="h-8 w-auto object-contain opacity-90 group-hover:opacity-100 transition" />
         </button>
       </div>
 
