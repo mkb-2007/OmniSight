@@ -2940,17 +2940,20 @@
     <!-- ========================================================================= -->
     <template x-if="currentView === 'portal-select'">
       <section
-        class="w-full relative min-h-[100svh] lg:h-[100svh] lg:max-h-screen bg-cover bg-center bg-no-repeat flex flex-col justify-between overflow-y-auto lg:overflow-hidden page-enter"
-        style="background-image: url('/portal-background.jpg');">
+        class="w-full relative min-h-[100svh] lg:h-[100svh] lg:max-h-screen flex flex-col justify-between overflow-y-auto lg:overflow-hidden page-enter">
 
-        <!-- Subtle Translucent Overlay (Tones down highway background while keeping cards and typography crisp) -->
-        <div class="absolute inset-0 bg-white/65 backdrop-blur-[2px] pointer-events-none"></div>
+        <!-- Vibrant High-Res Background Image Layer with Vivid Color & Contrast -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat saturate-[1.25] contrast-[1.06] pointer-events-none"
+          style="background-image: url('/portal-background.jpg');"></div>
+
+        <!-- Subtle Atmospheric Ambient Vignette (Leaves natural colors vivid while grounding cards & typography) -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white/25 via-transparent to-slate-950/30 pointer-events-none"></div>
 
         <!-- Top Navigation Row: Back to Home Link & Brand Logo -->
         <div
           class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 w-full flex items-center justify-between shrink-0">
           <button @click="navigateLanding()"
-            class="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-medium text-slate-600 hover:text-slate-900 bg-white/80 hover:bg-white border border-slate-200/60 px-3.5 py-1.5 rounded-full shadow-2xs backdrop-blur-md transition-all duration-200 cursor-pointer group">
+            class="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 bg-white/90 hover:bg-white border border-white/90 px-3.5 py-1.5 rounded-full shadow-md backdrop-blur-md transition-all duration-200 cursor-pointer group">
             <span class="text-slate-400 group-hover:text-slate-700 group-hover:-translate-x-0.5 transition-all">←</span>
             <span>Back to Home</span>
           </button>
@@ -2958,7 +2961,7 @@
           <button @click="navigateLanding()"
             class="flex items-center group cursor-pointer focus:outline-hidden" title="OmniSight Home">
             <img src="/omnisight-logo-transparent.png" alt="OmniSight"
-              class="h-6 sm:h-7 w-auto object-contain transition duration-200 group-hover:opacity-85" />
+              class="h-6 sm:h-7 w-auto object-contain transition duration-200 group-hover:opacity-85 drop-shadow-xs" />
           </button>
         </div>
 
@@ -2968,13 +2971,13 @@
 
           <!-- Header Text Block -->
           <div class="text-center max-w-xl mx-auto mb-6 sm:mb-8 shrink-0">
-            <div class="text-[11px] font-mono font-bold tracking-[0.2em] text-[#0077b6] uppercase mb-1.5">
+            <div class="text-[11px] font-mono font-bold tracking-[0.24em] text-[#0077b6] uppercase mb-1.5 drop-shadow-2xs">
               OMNISIGHT
             </div>
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight drop-shadow-xs">
               Choose Your Portal
             </h1>
-            <p class="text-xs sm:text-sm text-slate-500 mt-1.5 font-normal">
+            <p class="text-xs sm:text-sm text-slate-600 mt-1.5 font-medium">
               Select a portal to continue.
             </p>
           </div>
@@ -2985,7 +2988,7 @@
 
             <!-- 1. CITY PORTAL CARD -->
             <div @click="openLogin('city')"
-              class="group relative bg-white/90 hover:bg-white border border-slate-200/80 hover:border-sky-300 rounded-[22px] p-6 sm:p-7 shadow-sm hover:shadow-xl shadow-slate-900/5 backdrop-blur-md transition-all duration-200 transform hover:-translate-y-1 cursor-pointer flex flex-col justify-between items-center text-center">
+              class="group relative bg-white/95 hover:bg-white border border-white/90 hover:border-sky-400/80 rounded-[22px] p-6 sm:p-7 shadow-xl hover:shadow-2xl shadow-slate-900/15 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between items-center text-center">
 
               <div class="flex flex-col items-center">
                 <!-- Icon: City / Buildings -->
@@ -3021,7 +3024,7 @@
 
             <!-- 2. WARD PORTAL CARD -->
             <div @click="openLogin('ward')"
-              class="group relative bg-white/90 hover:bg-white border border-slate-200/80 hover:border-emerald-300 rounded-[22px] p-6 sm:p-7 shadow-sm hover:shadow-xl shadow-slate-900/5 backdrop-blur-md transition-all duration-200 transform hover:-translate-y-1 cursor-pointer flex flex-col justify-between items-center text-center">
+              class="group relative bg-white/95 hover:bg-white border border-white/90 hover:border-emerald-400/80 rounded-[22px] p-6 sm:p-7 shadow-xl hover:shadow-2xl shadow-slate-900/15 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between items-center text-center">
 
               <div class="flex flex-col items-center">
                 <!-- Icon: Location / Pin -->
@@ -3059,7 +3062,7 @@
 
             <!-- 3. DEVELOPER PORTAL CARD -->
             <div @click="openLogin('dev')"
-              class="group relative bg-white/90 hover:bg-white border border-slate-200/80 hover:border-purple-300 rounded-[22px] p-6 sm:p-7 shadow-sm hover:shadow-xl shadow-slate-900/5 backdrop-blur-md transition-all duration-200 transform hover:-translate-y-1 cursor-pointer flex flex-col justify-between items-center text-center">
+              class="group relative bg-white/95 hover:bg-white border border-white/90 hover:border-purple-400/80 rounded-[22px] p-6 sm:p-7 shadow-xl hover:shadow-2xl shadow-slate-900/15 backdrop-blur-md transition-all duration-300 transform hover:-translate-y-1.5 cursor-pointer flex flex-col justify-between items-center text-center">
 
               <div class="flex flex-col items-center">
                 <!-- Icon: CPU / Developer -->
@@ -3099,7 +3102,7 @@
 
         <!-- Subtle Minimal Footer -->
         <div
-          class="relative z-10 w-full py-3 sm:py-4 px-4 text-center text-xs font-medium text-slate-500 shrink-0">
+          class="relative z-10 w-full py-3 sm:py-4 px-4 text-center text-xs font-semibold text-slate-700/80 drop-shadow-2xs shrink-0">
           OmniSight • Edge-AI Road Intelligence
         </div>
 
